@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {withStyles} from 'material-ui/styles';
 import TextField from 'material-ui/TextField';
 import Grid from 'material-ui/Grid/Grid';
-import Card, { CardActions, CardContent, CardMedia } from 'material-ui/Card';
+import Paper from "material-ui/es/Paper/Paper";
 
 class TextFields extends React.Component {
 
@@ -27,43 +27,17 @@ class TextFields extends React.Component {
 
         return (
             <div className={classes.root}>
-                <Grid container align="center">
-                    <Card className={classes.card}>
-                        <CardContent>
-                            <form className={classes.container} noValidate autoComplete="off">
-                                <Grid item xs={12}>
-                                    <TextField
-                                        id="name"
-                                        label="Имя"
-                                        className={classes.textField}
-                                        value={this.state.name}
-                                        onChange={this.handleChange('name')}
-                                        margin="normal"
-                                    />
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <TextField
-                                        id="mail"
-                                        label="Mail"
-                                        className={classes.textField}
-                                        value={this.state.mail}
-                                        onChange={this.handleChange('mail')}
-                                        margin="normal"
-                                    />
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <TextField
-                                        id="password"
-                                        label="Придумайте пароль"
-                                        className={classes.textField}
-                                        value={this.state.password}
-                                        onChange={this.handleChange('password')}
-                                        margin="normal"
-                                    />
-                                </Grid>
-                            </form>
-                        </CardContent>
-                    </Card>
+                <Grid  xs={5} justify="center" alignItems="center" direction="row">
+                    {[0, 1, 2].map(value => (
+                        <Grid key={value} item>
+                            <Paper
+                                className={classes.paper}
+                                style={{ paddingTop: (value + 1) * 10, paddingBottom: (value + 1) * 10 }}
+                            >
+                                {`Cell ${value + 1}`}
+                            </Paper>
+                        </Grid>
+                        ))}
                 </Grid>
             </div>
         );
@@ -83,6 +57,10 @@ const styles = theme => ({
         marginLeft: theme.spacing.unit,
         marginRight: theme.spacing.unit,
         width: 200,
+    },
+    paper: {
+        padding: theme.spacing.unit * 2,
+        height: '100%',
     }
 });
 
