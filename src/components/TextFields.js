@@ -4,6 +4,21 @@ import {withStyles} from 'material-ui/styles';
 import TextField from 'material-ui/TextField';
 import Grid from 'material-ui/Grid/Grid';
 import Paper from "material-ui/es/Paper/Paper";
+import Button from "material-ui/es/Button/Button";
+
+const styles = theme => ({
+    root: {
+        flexGrow: 1,
+        height: "500px",
+    },
+    paper: {
+        padding: theme.spacing.unit * 2,
+        height: '100%'
+    },
+    container: {
+        height: '500px'
+    }
+});
 
 class TextFields extends React.Component {
 
@@ -23,23 +38,56 @@ class TextFields extends React.Component {
     };
 
     render() {
-        const {classes} = this.props;
-
         return (
-            <div className={classes.root}>
-                <Grid  xs={5} justify="center" alignItems="center" direction="row">
-                    {[0, 1, 2].map(value => (
-                        <Grid key={value} item>
-                            <Paper
-                                className={classes.paper}
-                                style={{ paddingTop: (value + 1) * 10, paddingBottom: (value + 1) * 10 }}
-                            >
-                                {`Cell ${value + 1}`}
+            <Grid container className={this.props.classes.root}>
+                <Grid item xs={12}>
+                    <Grid
+                        container
+                        className={this.props.classes.container}
+                        direction="row"
+                        alignItems="center"
+                        justify="center">
+                        <Grid item>
+                            <Paper className={this.props.classes.paper}>
+                                <form noValidate autoComplete="off">
+                                    <Grid item xs={12}>
+                                        <TextField
+                                            id="name"
+                                            label="Имя"
+                                            value={this.state.name}
+                                            onChange={this.handleChange('name')}
+                                            margin="normal"
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <TextField
+                                            id="mail"
+                                            label="Mail"
+                                            value={this.state.mail}
+                                            onChange={this.handleChange('mail')}
+                                            margin="normal"
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <TextField
+                                            id="password"
+                                            label="Придумайте пароль"
+                                            value={this.state.password}
+                                            onChange={this.handleChange('password')}
+                                            margin="normal"
+                                        />
+                                    </Grid>
+                                    <Grid xs={12}>
+                                        <Button variant="raised" color="primary" className={this.props.classes.button}>
+                                            Primary
+                                        </Button>
+                                    </Grid>
+                                </form>
                             </Paper>
                         </Grid>
-                        ))}
+                    </Grid>
                 </Grid>
-            </div>
+            </Grid>
         );
     }
 }
@@ -48,20 +96,5 @@ TextFields.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-const styles = theme => ({
-    container: {
-        display: 'flex',
-        flexWrap: 'wrap',
-    },
-    textField: {
-        marginLeft: theme.spacing.unit,
-        marginRight: theme.spacing.unit,
-        width: 200,
-    },
-    paper: {
-        padding: theme.spacing.unit * 2,
-        height: '100%',
-    }
-});
 
 export default withStyles(styles)(TextFields);
