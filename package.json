@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "formik": "^0.11.10",
     "material-ui": "^1.0.0-beta.33",
     "prop-types": "latest",
     "react": "^16.2.0",

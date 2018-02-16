@@ -5,6 +5,8 @@ import TextField from 'material-ui/TextField';
 import Grid from 'material-ui/Grid/Grid';
 import Paper from "material-ui/es/Paper/Paper";
 import Button from "material-ui/es/Button/Button";
+import {Formik} from "formik";
+import Api from "../api/Api";
 
 const styles = theme => ({
     root: {
@@ -49,6 +51,20 @@ class TextFields extends React.Component {
                         justify="center">
                         <Grid item>
                             <Paper className={this.props.classes.paper}>
+                                <Formik initialValues={{name: 'jared'}}
+                                        onSubmit={(values, actions) => {
+                                            Api.registration(user.id, values).then(
+                                                updatedUser => {
+                                                    actions.setSubmitting(false);
+                                                    updateUser(updatedUser);
+                                                    onClose();
+                                                },
+                                                error => {
+                                                    actions.setSubmitting(false);
+                                                    actions.setErrors(transformMyAPIErrorToAnObject(error));
+                                                }
+                                            );
+                                        }}/>
                                 <form noValidate autoComplete="off">
                                     <Grid container xs={12}>
                                         <Grid item xs={6}>
