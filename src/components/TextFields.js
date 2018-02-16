@@ -50,37 +50,54 @@ class TextFields extends React.Component {
                         <Grid item>
                             <Paper className={this.props.classes.paper}>
                                 <form noValidate autoComplete="off">
-                                    <Grid item xs={12}>
-                                        <TextField
-                                            id="name"
-                                            label="Имя"
-                                            value={this.state.name}
-                                            onChange={this.handleChange('name')}
-                                            margin="normal"
-                                        />
+                                    <Grid container xs={12}>
+                                        <Grid item xs={6}>
+                                            <TextField
+                                                id="name"
+                                                label="Имя"
+                                                value={this.state.name}
+                                                onChange={this.handleChange('name')}
+                                                margin="normal"
+                                            />
+                                        </Grid>
+                                        <Grid item xs={6}>
+                                            <TextField
+                                                id="mail"
+                                                label="Mail"
+                                                value={this.state.mail}
+                                                onChange={this.handleChange('mail')}
+                                                margin="normal"
+                                            />
+                                        </Grid>
                                     </Grid>
-                                    <Grid item xs={12}>
-                                        <TextField
-                                            id="mail"
-                                            label="Mail"
-                                            value={this.state.mail}
-                                            onChange={this.handleChange('mail')}
-                                            margin="normal"
-                                        />
+                                    <Grid container xs={12}>
+                                        <Grid item xs={6}>
+                                            <TextField
+                                                id="password"
+                                                label="Придумайте пароль"
+                                                value={this.state.password}
+                                                onChange={this.handleChange('password')}
+                                                margin="normal"
+                                            />
+                                        </Grid>
+                                        <Grid item xs={6}>
+                                            <TextField
+                                                id="password"
+                                                label="Повторите пароль"
+                                                value={this.state.password}
+                                                onChange={this.handleChange('password')}
+                                                margin="normal"
+                                            />
+                                        </Grid>
                                     </Grid>
-                                    <Grid item xs={12}>
-                                        <TextField
-                                            id="password"
-                                            label="Придумайте пароль"
-                                            value={this.state.password}
-                                            onChange={this.handleChange('password')}
-                                            margin="normal"
-                                        />
-                                    </Grid>
-                                    <Grid xs={12}>
-                                        <Button variant="raised" color="primary" className={this.props.classes.button}>
-                                            Primary
-                                        </Button>
+                                    <Grid container
+                                          alignItems={"center"}
+                                          justify={"flex-end"} xs={12}>
+                                        <Grid item>
+                                            <Button variant="raised" color="primary"
+                                                    className={this.props.classes.button}>
+                                                Регистрация</Button>
+                                        </Grid>
                                     </Grid>
                                 </form>
                             </Paper>
