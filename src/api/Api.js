@@ -40,6 +40,7 @@ class Api {
                 .then((response) => response.json())
                 .then((json) => handleResponse(json))
                 .catch((err) => {
+                    console.error("Failed executeRequest!");
                     throw new Error(err);
                 });
 
@@ -58,7 +59,9 @@ class Api {
                     console.log(messages);
                 });
             }
-        })
+        }).catch(e => {
+            console.log("Error on");
+        });
     }
 
     static pin = (authToken) => {
