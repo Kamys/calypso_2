@@ -29,7 +29,8 @@ class TextFields extends React.Component {
         this.state = {
             name: "",
             mail: "",
-            showPassword: false,
+            password: "",
+            rePassword: "",
         }
     }
 
@@ -53,20 +54,21 @@ class TextFields extends React.Component {
                             <Paper className={this.props.classes.paper}>
                                 <Formik initialValues={{name: 'jared'}}
                                         onSubmit={(values, actions) => {
-                                            Api.registration(user.id, values).then(
-                                                updatedUser => {
-                                                    actions.setSubmitting(false);
+                                            debugger;
+                                            Api.registration().then(
+                                                successfully => {
+                                                    /*actions.setSubmitting(false);
                                                     updateUser(updatedUser);
-                                                    onClose();
+                                                    onClose();*/
                                                 },
                                                 error => {
-                                                    actions.setSubmitting(false);
-                                                    actions.setErrors(transformMyAPIErrorToAnObject(error));
+                                                    /*actions.setSubmitting(false);
+                                                    actions.setErrors(transformMyAPIErrorToAnObject(error));*/
                                                 }
                                             );
                                         }}/>
                                 <form noValidate autoComplete="off">
-                                    <Grid container xs={12}>
+                                    <Grid container>
                                         <Grid item xs={6}>
                                             <TextField
                                                 id="name"
@@ -86,7 +88,7 @@ class TextFields extends React.Component {
                                             />
                                         </Grid>
                                     </Grid>
-                                    <Grid container xs={12}>
+                                    <Grid container>
                                         <Grid item xs={6}>
                                             <TextField
                                                 id="password"
@@ -98,17 +100,17 @@ class TextFields extends React.Component {
                                         </Grid>
                                         <Grid item xs={6}>
                                             <TextField
-                                                id="password"
+                                                id="re-password"
                                                 label="Повторите пароль"
-                                                value={this.state.password}
-                                                onChange={this.handleChange('password')}
+                                                value={this.state.rePassword}
+                                                onChange={this.handleChange('rePassword')}
                                                 margin="normal"
                                             />
                                         </Grid>
                                     </Grid>
                                     <Grid container
                                           alignItems={"center"}
-                                          justify={"flex-end"} xs={12}>
+                                          justify={"flex-end"}>
                                         <Grid item>
                                             <Button variant="raised" color="primary"
                                                     className={this.props.classes.button}>
