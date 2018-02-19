@@ -3,8 +3,13 @@ import Button from "material-ui/es/Button/Button";
 import {Form} from 'formik';
 import TextField from 'material-ui/TextField';
 import Grid from 'material-ui/Grid/Grid';
-
+import {withFormik} from 'formik';
+import {setLocale} from 'yup/lib/customLocale'
 import {withStyles} from "material-ui/styles/index";
+import Yup from "yup";
+import {setLocale} from "yup/lib/customLocale";
+import EventName from "../redux/EventName";
+import {connect} from "react-redux";
 
 const RegistrationFormStyles = () => ({
     errorMessages: {
@@ -100,4 +105,71 @@ class RegistrationForm extends React.Component {
     }
 }
 
-export default withStyles(RegistrationFormStyles)(RegistrationForm);
+setLocale({
+	string: {
+		min: "Должен быть больше ${min}",
+		email: "Неправильный email",
+	},
+	mixed: {
+		required: "Обязательное поле",
+	}
+});
+
+const RegistrationFormik = withFormik({
+	mapPropsToValues: (props) => ({
+		login: props.login || "TestUser1",
+		fullName: props.username || "Вася И.",
+		password: props.password || "12345ef4r4Dr4",
+		rePassword: props.password || "12345ef4r4Dr4",
+	}),
+	validationSchema: Yup.object().shape({
+		login: Yup.string()
+			.min(6)
+			.required(),
+		fullName: Yup.string()
+			.min(6)
+			.required(),
+		password: Yup.string()
+		//TODO: Add other matches
+			.matches(/(\d)/, {excludeEmptyString: true, message: "Пароль должен содержать цифру"})
+			.min(6)
+			.required(),
+		rePassword: Yup.string()
+			.test("match", "Пароли не равны", function (rePassword) {
+				return rePassword === this.parent.password
+			})
+			.required(),
+	}),
+	handleSubmit: (values, FormikBag) => {
+		debugger
+		FormikBag.props.props.registrationUser(values.fullName, values.login, values.password);
+	},
+	displayName: 'RegistrationFormik',
+})(withStyles(RegistrationFormStyles)(RegistrationForm));
+
+const mapStateToProps = (state) => {
+	return {
+		registration: state.registration
+	}
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+	return {
+		registrationUser: (fullName, login, password) => {
+			const payload = {
+				fullName,
+				login,
+				password
+			};
+			dispatch({
+				type: EventName.REGISTRATION_USER, payload
+			})
+		}
+	}
+};
+
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps)
+(RegistrationFormik);

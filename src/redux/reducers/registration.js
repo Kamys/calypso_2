@@ -1,6 +1,6 @@
 import EventName from "../EventName";
 
-export default function userAccount(state = [], action) {
+export default function registration(state = [], action) {
 	if (action.type === EventName.REGISTRATION_USER) {
 		state.errors = "Server failed!!!";
 		return state;

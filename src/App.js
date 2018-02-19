@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Route} from 'react-router'
-import RegistrationPage from "./components/RegistrationPage";
+import RegistrationPage from "./components/CenterPaper";
 import PrivateRoute from "./components/PrivateRoute";
 import {BrowserRouter} from 'react-router-dom'
 
