@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import { Switch, Route } from 'react-router'
+import {Route } from 'react-router'
 import RegistrationPage from "./components/RegistrationPage";
 import PrivateRoute from "./components/PrivateRoute";
 
@@ -9,18 +9,14 @@ class App extends Component {
 	render() {
 		return (
 			<div>
-				<Switch>
-					<Route exact path="/" component={Home}/>
-					<Route exact path="/login" component={Login}/>
-					<Route exact path="/registration" component={RegistrationPage}/>
-					<PrivateRoute path="/userPanel" component={UserPanel}/>
-				</Switch>
+				<Route exact path="/" component={Home}/>
+				<Route exact path="/login" component={Login}/>
+				<Route exact path="/registration" component={RegistrationPage}/>
+				<PrivateRoute path="/userPanel" component={UserPanel}/>
 			</div>
 		);
 	}
 }
-
-
 
 
 class Login extends Component {
