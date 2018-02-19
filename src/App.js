@@ -1,24 +1,44 @@
 import React, {Component} from 'react';
-import RegistrationPage from "./components/RegistrationPage";
-import {Route, Redirect} from 'react-router'
-import Api from './api/Api'
+import PrivateRoute from "./components/PrivateRoute";
+import Route from "react-router-dom/es/Route";
+
 
 class App extends Component {
     render() {
         return (
-            <Route exact path="/" render={() => (
-                App.checkUserAuthorization() ? (
-                    <Redirect to="/dashboard"/>
-                ) : (
-                    <RegistrationPage/>
-                ))}
-            />
+            <div>
+                <Route path="/login" component={Login} />
+                <PrivateRoute exact path="/userPanel" component={<h1>This is user panel</h1>}/>
+            </div>
         );
     }
+}
 
-    static checkUserAuthorization() {
-        let authToken = Api.getAuthToken();
-        return !!authToken;
+class Login extends React.Component {
+    state = {
+        redirectToReferrer: false
+    };
+
+    login = () => {
+        fakeAuth.authenticate(() => {
+            this.setState({ redirectToReferrer: true });
+        });
+    };
+
+    render() {
+        const { from } = this.props.location.state || { from: { pathname: "/" } };
+        const { redirectToReferrer } = this.state;
+
+        if (redirectToReferrer) {
+            return <Redirect to={from} />;
+        }
+
+        return (
+            <div>
+                <p>You must log in to view the page at {from.pathname}</p>
+                <button onClick={this.login}>Log in</button>
+            </div>
+        );
     }
 }
 
