@@ -18,10 +18,13 @@ class Api {
         let requestPromise = Api.executeRequest(data, "user/register");
         requestPromise.then(
             json => {
+
                 let authToken = json.data['auth_token'];
                 localStorage.setItem(Api.keyAuthToken, JSON.stringify(authToken));
             }
-        );
+        ).catch(() => {
+            console.log("Error on");
+        });
         return requestPromise;
     };
 
@@ -59,8 +62,6 @@ class Api {
                     console.log(messages);
                 });
             }
-        }).catch(e => {
-            console.log("Error on");
         });
     }
 
