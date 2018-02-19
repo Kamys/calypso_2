@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import TextFields from "./components/TextFields";
+import RegistrationPage from "./components/RegistrationPage";
 
 class App extends Component {
   render() {
     return (
-        <TextFields/>
+        <RegistrationPage/>
     );
   }
 }

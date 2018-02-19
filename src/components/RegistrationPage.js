@@ -11,7 +11,7 @@ import {withFormik} from 'formik';
 import {setLocale} from 'yup/lib/customLocale'
 import Yup from 'yup';
 
-const ContainerFormStyles = theme => ({
+const RegistrationPage = theme => ({
     root: {
         flexGrow: 1,
         height: "500px",
@@ -168,11 +168,7 @@ const RegistrationFormik = withFormik({
 })(withStyles(RegistrationFormStyles)(RegistrationForm));
 
 
-class ContainerForm extends React.Component {
-
-    constructor(props) {
-        super(props);
-    }
+class RegistrationPage extends React.Component {
 
     render() {
         return (
@@ -201,4 +197,4 @@ RegistrationForm.propTypes = {
 };
 
 
-export default withStyles(ContainerFormStyles)(ContainerForm);
+export default withStyles(RegistrationPage)(RegistrationPage);
