@@ -65,11 +65,6 @@ class Api {
         });
     }
 
-    static pin = (authToken) => {
-
-
-    };
-
     static getAuthToken = () => {
         return localStorage.getItem(Api.keyAuthToken);
     };
