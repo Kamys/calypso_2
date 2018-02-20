@@ -22,8 +22,6 @@ const styles = theme => ({
     },
     title: {
         marginBottom: 16,
-        fontSize: 14,
-        color: theme.palette.text.secondary,
     },
     pos: {
         marginBottom: 12,
@@ -37,8 +35,9 @@ class Test extends Component {
         return (
             <Card className={this.props.classes.card}>
                 <CardContent>
-                    <Typography component="h2" className={this.props.classes.title}>{this.props.title}</Typography>
-
+                    <Typography component="h2" variant="title" className={this.props.classes.title}>
+                        {this.props.title}
+                        </Typography>
                     <Grid container wrap="nowrap">
                         <Grid item xs>
                             <Typography component="p">
