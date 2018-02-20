@@ -16,20 +16,20 @@ const checkAutorisation = () => dispatch => {
     );
 
     function checkAutorisationSuccessful(result) {
-        executeEvent(result, true);
-    }
-
-    function checkAutorisationFailed(error) {
-        executeEvent(false);
-    }
-
-    function executeEvent(result, isAutorisationSuccessful) {
         dispatch({
             type: EventName.USER_ACCOUNT.CHECK_AUTORISATION, data: {
-                isAutorisationSuccessful,
+                isAutorisationSuccessful: true,
                 fullName: result.data.fio,
                 username: result.data.username,
                 userType: result.data.type.id_type_user
+            }
+        })
+    }
+
+    function checkAutorisationFailed(error) {
+        dispatch({
+            type: EventName.USER_ACCOUNT.CHECK_AUTORISATION, data: {
+                isAutorisationSuccessful: false
             }
         })
     }
