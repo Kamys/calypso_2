@@ -1,5 +1,5 @@
-import Api from "../api/Api";
-import EventName from "../redux/EventName";
+import Api from "../../api/Api";
+import EventName from "../EventName";
 
 
 const registrationRequest = (fullName, login, password) => dispatch => {

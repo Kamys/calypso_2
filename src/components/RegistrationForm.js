@@ -8,7 +8,7 @@ import {setLocale} from "yup/lib/customLocale"
 import {withStyles} from "material-ui/styles/index";
 import Yup from "yup";
 import {connect} from "react-redux";
-import registrationRequest from "../actions/registrationRequest"
+import registrationRequest from "../redux/actions/registrationRequest"
 
 const RegistrationFormStyles = () => ({
 	errorMessages: {
@@ -27,6 +27,7 @@ class RegistrationForm extends React.Component {
 			handleBlur,
 			handleSubmit,
 		} = this.props;
+
 		return (
 			<Form onSubmit={handleSubmit}>
 				<Grid container>
