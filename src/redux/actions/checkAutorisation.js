@@ -2,10 +2,6 @@ import Api from "../../api/Api";
 import EventName from "../EventName";
 import {loadingStart, loadingStop} from "../actions/loadingAction";
 
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
-
 const checkAutorisation = () => dispatch => {
     dispatch(loadingStart());
     Api.ping().then(
@@ -17,20 +13,25 @@ const checkAutorisation = () => dispatch => {
             checkAutorisationFailed(error);
             dispatch(loadingStop())
         }
-    ).finally(
-
     );
 
-    function checkAutorisationSuccessful() {
-        executeEvent(true);
+    function checkAutorisationSuccessful(result) {
+        executeEvent(result, true);
     }
 
-    function checkAutorisationFailed() {
+    function checkAutorisationFailed(error) {
         executeEvent(false);
     }
 
-    function executeEvent(isAutorisationSuccessful) {
-        dispatch({type: EventName.USER_ACCOUNT.CHECK_AUTORISATION, data: {isAutorisationSuccessful}})
+    function executeEvent(result, isAutorisationSuccessful) {
+        dispatch({
+            type: EventName.USER_ACCOUNT.CHECK_AUTORISATION, data: {
+                isAutorisationSuccessful,
+                fullName: result.data.fio,
+                username: result.data.username,
+                userType: result.data.type.id_type_user
+            }
+        })
     }
 };
 

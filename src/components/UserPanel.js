@@ -4,6 +4,8 @@ import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import "./UserPanel.css"
+import checkAutorisation from "../redux/actions/checkAutorisation";
+import {connect} from "react-redux";
 
 const styles = {
     root: {
@@ -28,7 +30,7 @@ class UserPanel extends Component {
                             Панель пользователя
                         </Typography>
                         <Typography variant="title" color="primary">
-                            Вася М.
+                            {this.props.userAccount.fullName}
                         </Typography>
                     </Toolbar>
                 </AppBar>
@@ -37,4 +39,22 @@ class UserPanel extends Component {
     }
 }
 
-export default withStyles(styles)(UserPanel);
+const mapStateToProps = (state) => {
+    return {
+        userAccount: state.userAccount,
+    }
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        /*onCheckAutorisation: () => {
+            dispatch(checkAutorisation())
+        }*/
+    }
+};
+
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps)
+(withStyles(styles)(UserPanel));
