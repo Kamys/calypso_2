@@ -18,12 +18,11 @@ class Api {
 		let requestPromise = Api.executeRequest(data, "user/register");
 		requestPromise.then(
 			json => {
-
 				let authToken = json.data['auth_token'];
 				localStorage.setItem(Api.keyAuthToken, JSON.stringify(authToken));
 			}
-		).catch(() => {
-			console.log("Error on");
+		).catch((e) => {
+			console.log("Error", e);
 		});
 		return requestPromise;
 	};
@@ -43,9 +42,9 @@ class Api {
 			})
 				.then((response) => response.json())
 				.then((json) => handleResponse(json))
-				.catch((err) => {
-					console.error("Failed executeRequest!");
-					throw new Error(err);
+				.catch((e) => {
+					console.error("Failed executeRequest!", e);
+					throw new Error(e);
 				});
 
 			function handleResponse(json) {
@@ -58,7 +57,7 @@ class Api {
 				}
 			}
 
-			function showMessages(json, className) {
+			function showMessages(json) {
 				json.data.messages.map((messages) => {
 					console.log(messages);
 				});

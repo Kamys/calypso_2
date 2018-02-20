@@ -31,13 +31,14 @@ class RegistrationForm extends React.Component {
 			handleSubmit,
             registration,
 		} = this.props;
-
         let messages = registration.messages || [];
+        let isRegistrationSuccessful = registration.isSuccessful || false;
 
         let errorMessagesClassName = this.props.classes.infoMessages;
-		if(registration.isError){
+        if(!isRegistrationSuccessful){
             errorMessagesClassName = this.props.classes.errorMessages;
         }
+
 
 		return (
 			<Form onSubmit={handleSubmit}>
@@ -102,12 +103,12 @@ class RegistrationForm extends React.Component {
 					  alignItems={"center"}
 					  justify={"flex-end"}>
 					<Grid item>
-						<Button type="submit" disabled={isSubmitting} variant="raised"
+						<Button type="submit" disabled={isRegistrationSuccessful} variant="raised"
 								color="primary">
 							Регистрация</Button>
 					</Grid>
-                    {messages.map((message) => (
-                        <Grid className={errorMessagesClassName} item>
+                    {messages.map((message, index) => (
+                        <Grid key={index} className={errorMessagesClassName} item>
                             {<div>{message}</div>}
                         </Grid>
                     ))}
@@ -153,7 +154,7 @@ const RegistrationFormik = withFormik({
 			.required(),
 	}),
 	handleSubmit: (values, FormikBag) => {
-		FormikBag.props.onRegistrationRequest(values.fullName, values.login, values.password);
+		FormikBag.props.onRegistrationRequest(values);
 	},
 	displayName: 'RegistrationFormik',
 })(withStyles(RegistrationFormStyles)(RegistrationForm));
@@ -166,8 +167,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
 	return {
-		onRegistrationRequest: () =>{
-			dispatch(registrationRequest())
+		onRegistrationRequest: (values) =>{
+			dispatch(registrationRequest(values))
 		}
 	}
 };
