@@ -5,15 +5,16 @@ import EventName from "../EventName";
 const registrationRequest = (fullName, login, password) => dispatch => {
 	Api.registration(fullName, login, password,).then(
 		result => {
+			debugger
 			executeDispatch(result, false);
 		},
 		error => {
-			executeDispatch(error, true);
+			executeDispatch(error.data.messages, true);
 		}
 	);
 
-	function executeDispatch(massages, isError) {
-		dispatch({type: EventName.REGISTRATION.REGISTER_REQUEST, data: {massages, isError}})
+	function executeDispatch(messages, isError) {
+		dispatch({type: EventName.REGISTRATION.REGISTER_REQUEST, data: {messages, isError}})
 	}
 };
 

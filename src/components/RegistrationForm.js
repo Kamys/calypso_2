@@ -13,7 +13,10 @@ import registrationRequest from "../redux/actions/registrationRequest"
 const RegistrationFormStyles = () => ({
 	errorMessages: {
 		color: "#E91E63",
-	}
+	},
+    infoMessages: {
+        color: "#6de960",
+    }
 });
 
 class RegistrationForm extends React.Component {
@@ -26,7 +29,15 @@ class RegistrationForm extends React.Component {
 			handleChange,
 			handleBlur,
 			handleSubmit,
+            registration,
 		} = this.props;
+
+        let messages = registration.messages || [];
+
+        let errorMessagesClassName = this.props.classes.infoMessages;
+		if(registration.isError){
+            errorMessagesClassName = this.props.classes.errorMessages;
+        }
 
 		return (
 			<Form onSubmit={handleSubmit}>
@@ -95,10 +106,11 @@ class RegistrationForm extends React.Component {
 								color="primary">
 							Регистрация</Button>
 					</Grid>
-					<Grid className={this.props.classes.errorMessages} item>
-						{<div>{this.props.registration.errors}</div>}
-					</Grid>
-
+                    {messages.map((message) => (
+                        <Grid className={errorMessagesClassName} item>
+                            {<div>{message}</div>}
+                        </Grid>
+                    ))}
 				</Grid>
 			</Form>
 		);
