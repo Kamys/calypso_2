@@ -1,108 +1,107 @@
-import React from 'react';
+import React from "react";
 import Button from "material-ui/es/Button/Button";
-import {Form} from 'formik';
-import TextField from 'material-ui/TextField';
-import Grid from 'material-ui/Grid/Grid';
-import {withFormik} from 'formik';
-import {setLocale} from 'yup/lib/customLocale'
+import {Form} from "formik";
+import TextField from "material-ui/TextField";
+import Grid from "material-ui/Grid/Grid";
+import {withFormik} from "formik";
+import {setLocale} from "yup/lib/customLocale"
 import {withStyles} from "material-ui/styles/index";
 import Yup from "yup";
-import {setLocale} from "yup/lib/customLocale";
-import EventName from "../redux/EventName";
 import {connect} from "react-redux";
+import registrationRequest from "../actions/registrationRequest"
 
 const RegistrationFormStyles = () => ({
-    errorMessages: {
-        color: "#E91E63",
-    }
+	errorMessages: {
+		color: "#E91E63",
+	}
 });
 
 class RegistrationForm extends React.Component {
-    render() {
-        const {
-            values,
-            touched,
-            errors,
-            isSubmitting,
-            handleChange,
-            handleBlur,
-            handleSubmit,
-        } = this.props;
-        return (
-            <Form onSubmit={handleSubmit}>
-                <Grid container>
-                    <Grid item xs={6}>
-                        <TextField
-                            id="fullName"
-                            label="ФИО"
-                            margin="normal"
-                            type="text"
-                            value={values.fullName}
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            error={errors.fullName && touched.fullName}
-                            helperText={errors.fullName}
-                        />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <TextField
-                            id="login"
-                            label="login"
-                            margin="normal"
-                            type="mail"
-                            value={values.login}
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            error={errors.login && touched.login}
-                            helperText={errors.login}
-                        />
-                    </Grid>
-                </Grid>
-                <Grid container>
-                    <Grid item xs={6}>
-                        <TextField
-                            id="password"
-                            label="Придумайте пароль"
-                            margin="normal"
-                            type="password"
-                            value={values.password}
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            error={errors.password && touched.password}
-                            helperText={errors.password}
-                        />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <TextField
-                            id="rePassword"
-                            label="Повторите пароль"
-                            margin="normal"
-                            type="password"
-                            value={values.rePassword}
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            error={errors.rePassword && touched.rePassword}
-                            helperText={errors.rePassword}
-                        />
-                    </Grid>
-                </Grid>
-                <Grid container
-                      direction="column"
-                      alignItems={"center"}
-                      justify={"flex-end"}>
-                    <Grid item>
-                        <Button type="submit" disabled={isSubmitting} variant="raised"
-                                color="primary">
-                            Регистрация</Button>
-                    </Grid>
-                    <Grid className={this.props.classes.errorMessages} item>
-                        {<div>{errors.server}</div>}
-                    </Grid>
+	render() {
+		const {
+			values,
+			touched,
+			errors,
+			isSubmitting,
+			handleChange,
+			handleBlur,
+			handleSubmit,
+		} = this.props;
+		return (
+			<Form onSubmit={handleSubmit}>
+				<Grid container>
+					<Grid item xs={6}>
+						<TextField
+							id="fullName"
+							label="ФИО"
+							margin="normal"
+							type="text"
+							value={values.fullName}
+							onChange={handleChange}
+							onBlur={handleBlur}
+							error={errors.fullName && touched.fullName}
+							helperText={errors.fullName}
+						/>
+					</Grid>
+					<Grid item xs={6}>
+						<TextField
+							id="login"
+							label="login"
+							margin="normal"
+							type="mail"
+							value={values.login}
+							onChange={handleChange}
+							onBlur={handleBlur}
+							error={errors.login && touched.login}
+							helperText={errors.login}
+						/>
+					</Grid>
+				</Grid>
+				<Grid container>
+					<Grid item xs={6}>
+						<TextField
+							id="password"
+							label="Придумайте пароль"
+							margin="normal"
+							type="password"
+							value={values.password}
+							onChange={handleChange}
+							onBlur={handleBlur}
+							error={errors.password && touched.password}
+							helperText={errors.password}
+						/>
+					</Grid>
+					<Grid item xs={6}>
+						<TextField
+							id="rePassword"
+							label="Повторите пароль"
+							margin="normal"
+							type="password"
+							value={values.rePassword}
+							onChange={handleChange}
+							onBlur={handleBlur}
+							error={errors.rePassword && touched.rePassword}
+							helperText={errors.rePassword}
+						/>
+					</Grid>
+				</Grid>
+				<Grid container
+					  direction="column"
+					  alignItems={"center"}
+					  justify={"flex-end"}>
+					<Grid item>
+						<Button type="submit" disabled={isSubmitting} variant="raised"
+								color="primary">
+							Регистрация</Button>
+					</Grid>
+					<Grid className={this.props.classes.errorMessages} item>
+						{<div>{this.props.registration.errors}</div>}
+					</Grid>
 
-                </Grid>
-            </Form>
-        );
-    }
+				</Grid>
+			</Form>
+		);
+	}
 }
 
 setLocale({
@@ -141,8 +140,7 @@ const RegistrationFormik = withFormik({
 			.required(),
 	}),
 	handleSubmit: (values, FormikBag) => {
-		debugger
-		FormikBag.props.props.registrationUser(values.fullName, values.login, values.password);
+		FormikBag.props.onRegistrationRequest(values.fullName, values.login, values.password);
 	},
 	displayName: 'RegistrationFormik',
 })(withStyles(RegistrationFormStyles)(RegistrationForm));
@@ -155,15 +153,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
 	return {
-		registrationUser: (fullName, login, password) => {
-			const payload = {
-				fullName,
-				login,
-				password
-			};
-			dispatch({
-				type: EventName.REGISTRATION_USER, payload
-			})
+		onRegistrationRequest: () =>{
+			dispatch(registrationRequest())
 		}
 	}
 };
