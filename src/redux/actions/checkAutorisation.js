@@ -1,28 +1,37 @@
 import Api from "../../api/Api";
 import EventName from "../EventName";
+import {loadingStart, loadingStop} from "../actions/loadingAction";
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 
-const checkAutorisation = (values) => dispatch => {
+const checkAutorisation = () => dispatch => {
+    dispatch(loadingStart());
     Api.ping().then(
         result => {
-            checkAutorisationSuccessful();
+            checkAutorisationSuccessful(result);
+            dispatch(loadingStop())
         },
         error => {
-            checkAutorisationFailed();
+            checkAutorisationFailed(error);
+            dispatch(loadingStop())
         }
+    ).finally(
+
     );
 
     function checkAutorisationSuccessful() {
-        executeEvent();
+        executeEvent(true);
     }
 
     function checkAutorisationFailed() {
-        executeEvent();
+        executeEvent(false);
     }
 
-    function executeEvent() {
-        dispatch({type: EventName.USER_ACCOUNT.CHECK_AUTORISATION, data: {}})
+    function executeEvent(isAutorisationSuccessful) {
+        dispatch({type: EventName.USER_ACCOUNT.CHECK_AUTORISATION, data: {isAutorisationSuccessful}})
     }
 };
 
-export default registrationRequest;
+export default checkAutorisation;

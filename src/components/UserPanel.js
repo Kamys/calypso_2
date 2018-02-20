@@ -30,7 +30,6 @@ class UserPanel extends Component {
                         <Typography variant="title" color="primary">
                             Вася М.
                         </Typography>
-
                     </Toolbar>
                 </AppBar>
             </div>

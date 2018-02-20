@@ -19,7 +19,7 @@ class Api {
         requestPromise.then(
             json => {
                 let authToken = json.data['auth_token'];
-                localStorage.setItem(Api.keyAuthToken, JSON.stringify(authToken));
+                localStorage.setItem(Api.keyAuthToken, authToken);
             }
         ).catch((e) => {
             console.log("Error", e);
@@ -33,13 +33,12 @@ class Api {
 
     static ping = () => {
         const data = {
-            auth_token: Api.getAuthToken(),
+            token: Api.getAuthToken(),
         };
-
         let requestPromise = Api.executeRequest(data, "user/ping");
-        requestPromise.then()
+        requestPromise.then(() =>{})
             .catch((e) => {
-                console.log("Error", e);
+                console.error("Error", e);
             });
         return requestPromise;
     };
@@ -47,8 +46,9 @@ class Api {
     static executeRequest(data, methodName) {
         return new Promise((resolve, reject) => {
             let url = Api.apiUrl + methodName;
-            console.log("url " + url);
-            console.log("data " + JSON.stringify(data));
+            console.log("========= Request =========");
+            console.log("Request url - ", url);
+            console.log("Request data - ", data);
             fetch(url, {
                 method: "POST",
                 body: JSON.stringify(data),
@@ -59,11 +59,13 @@ class Api {
             })
                 .then((response) => response.json())
                 .then((json) => handleResponse(json))
-                .then((json) => console.log("Data = ", json))
                 .catch((e) => {
                     console.error("Failed executeRequest!", e);
-                    throw new Error(e);
-                });
+                }).finally((json) => {
+                console.log("Response data = ", json);
+                console.log("==================");
+                return json;
+            });
 
             function handleResponse(json) {
                 if (json.status) {
@@ -76,8 +78,9 @@ class Api {
             }
 
             function showMessages(json) {
-                json.data.messages.map((messages) => {
-                    console.log(messages);
+                let messages = json.data.messages || [];
+                messages.map((message) => {
+                    console.log(message);
                 });
             }
         });

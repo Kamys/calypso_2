@@ -1,29 +1,57 @@
 import React, {Component} from 'react'
 import Redirect from "react-router-dom/es/Redirect";
 import Route from "react-router-dom/es/Route";
-import Api from '../api/Api'
+import checkAutorisation from "../redux/actions/checkAutorisation";
+import {connect} from "react-redux";
 
-const PrivateRoute = ({component: Component, ...rest}) => (
-	<Route
-		{...rest}
-		render={props =>
-			checkUserAuthorization() ? (
-				<Component {...props} />
-			) : (
-				<Redirect
-					to={{
-						pathname: "/login",
-						state: {from: props.location}
-					}}
-				/>
-			)
-		}
-	/>
-);
+class PrivateRoute extends React.Component {
 
-function checkUserAuthorization() {
-	let authToken = Api.ping();
-	return !!authToken;
+    componentWillMount(){
+        this.props.onCheckAutorisation();
+    }
+
+    render() {
+        const {component: Component, ...rest} = this.props;
+
+        const dataLoading = this.props.loading.isDataLoading;
+        if (dataLoading) {
+            return(
+                <h1>Loading....</h1>
+            )
+        }
+
+        return (
+            <Route {...rest} render={(props) => {
+                return this.props.userAccount.isAutorisationSuccessful ? (
+                    <Component {...props} />
+                ) : (
+                    <Redirect to={{
+                        pathname: '/login',
+                        state: {from: this.props.location}
+                    }}/>
+                )
+            }}/>
+        )
+    }
 }
 
-export default PrivateRoute;
+const mapStateToProps = (state) => {
+    return {
+        userAccount: state.userAccount,
+        loading: state.loading
+    }
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        onCheckAutorisation: () => {
+            dispatch(checkAutorisation())
+        }
+    }
+};
+
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps)
+(PrivateRoute);
