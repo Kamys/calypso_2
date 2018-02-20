@@ -7,6 +7,8 @@ import "./UserPanel.css"
 import {connect} from "react-redux";
 import Grid from "material-ui/Grid/Grid";
 import Test from "./Test";
+import Button from "material-ui/es/Button/Button";
+import AddIcon from 'material-ui-icons/Add';
 
 const styles = {
     root: {
@@ -52,6 +54,7 @@ let NavAppBar = (props) =>(
     </AppBar>
 );
 
+
 class UserPanel extends Component {
     render() {
         return (
@@ -69,6 +72,16 @@ class UserPanel extends Component {
                         </Grid>
                     </Grid>
                 </Grid>
+                <Button variant="fab" color='primary' style={{
+                    top: "auto",
+                    right: 20,
+                    bottom: 20,
+                    left: "auto",
+                    position: "fixed",
+
+                }}>
+                    <AddIcon />
+                </Button>
             </div>
         );
     }
