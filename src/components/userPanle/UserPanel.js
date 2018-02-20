@@ -24,7 +24,10 @@ const styles = {
     },
     container: {
         marginLeft: 5,
-        marginTop: 5,
+        marginTop: 70,
+    },
+    appBar: {
+        width: "100%",
     }
 };
 
@@ -38,7 +41,7 @@ let TestList = (props) => {
 };
 
 let NavAppBar = (props) =>(
-    <AppBar position="static" color="default">
+    <AppBar position="fixed" color="default" className={props.classes.appBar}>
         <Toolbar>
             <Typography variant="title" color="inherit" className={props.classes.flex}>
                 Панель пользователя
@@ -51,7 +54,7 @@ let NavAppBar = (props) =>(
 );
 
 
-class UserPanel extends Component {
+class TeacherPanel extends Component {
     render() {
         return (
             <div>
@@ -106,4 +109,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps)
-(withStyles(styles)(UserPanel));
+(withStyles(styles)(TeacherPanel));

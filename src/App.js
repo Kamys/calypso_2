@@ -11,17 +11,6 @@ class App extends Component {
         return (
             <BrowserRouter>
                 <div>
-                    <ul>
-                        <li>
-                            <Link to="/registration">Registration</Link>
-                        </li>
-                        <li>
-                            <Link to="/login">login</Link>
-                        </li>
-                        <li>
-                            <Link to="/userPanel">userPanel</Link>
-                        </li>
-                    </ul>
                     <Route exact path="/" component={Home}/>
                     <Route exact path="/login" component={Login}/>
                     <Route exact path="/registration" component={RegistrationPage}/>
