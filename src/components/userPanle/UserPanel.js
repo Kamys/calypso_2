@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { withStyles } from 'material-ui/styles';
+import {withStyles} from 'material-ui/styles';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
@@ -9,6 +9,7 @@ import Grid from "material-ui/Grid/Grid";
 import Test from "./Test";
 import Button from "material-ui/es/Button/Button";
 import AddIcon from 'material-ui-icons/Add';
+import {addTest} from "../../redux/actions/TestAction";
 
 const styles = {
     root: {
@@ -27,19 +28,14 @@ const styles = {
     }
 };
 
-function TestList() {
-    let listTest = [];
-    for(let i = 0; i < 20; i++){
-        listTest.push(
-            <Grid item>
-                <Test/>
-            </Grid>
-        );
-    }
-    return listTest;
-
-
-}
+let TestList = (props) => {
+    let listTest = props.tests;
+    return listTest.map(test => (
+        <Grid item>
+            <Test title={test.title} description={test.description}/>
+        </Grid>
+    ));
+};
 
 let NavAppBar = (props) =>(
     <AppBar position="static" color="default">
@@ -68,11 +64,11 @@ class UserPanel extends Component {
                             direction="row"
                             alignItems="flex-start"
                             justify="flex-start">
-                            <TestList/>
+                            <TestList tests={this.props.testReducer}/>
                         </Grid>
                     </Grid>
                 </Grid>
-                <Button variant="fab" color='primary' style={{
+                <Button onClick={this.addTest} variant="fab" color='primary' style={{
                     top: "auto",
                     right: 20,
                     bottom: 20,
@@ -80,24 +76,29 @@ class UserPanel extends Component {
                     position: "fixed",
 
                 }}>
-                    <AddIcon />
+                    <AddIcon/>
                 </Button>
             </div>
         );
+    }
+
+    addTest = () => {
+        this.props.onAddTest()
     }
 }
 
 const mapStateToProps = (state) => {
     return {
         userAccount: state.userAccount,
+        testReducer: state.testReducer,
     }
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        /*onCheckAutorisation: () => {
-            dispatch(checkAutorisation())
-        }*/
+        onAddTest: () => {
+            dispatch(addTest("Test", "Description"))
+        }
     }
 };
 

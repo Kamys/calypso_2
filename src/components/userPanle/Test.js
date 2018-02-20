@@ -37,15 +37,12 @@ class Test extends Component {
         return (
             <Card className={this.props.classes.card}>
                 <CardContent>
-                    <Typography component="h2" className={this.props.classes.title}>Тест 1</Typography>
+                    <Typography component="h2" className={this.props.classes.title}>{this.props.title}</Typography>
 
                     <Grid container wrap="nowrap">
                         <Grid item xs>
                             <Typography component="p">
-                                This is text for description this test. May be not (: This is text for description this
-                                test. May be not (: This is text for description this test. May be not (: This is text for
-                                description this test. May be not (: This is text for description this test. May be not (:
-                                This is text for description this test. May be not (:
+                                {this.props.description}
                             </Typography>
                         </Grid>
                     </Grid>
