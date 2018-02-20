@@ -4,10 +4,6 @@ import EventName from "../EventName";
 
 const registrationRequest = (values) => dispatch => {
     Api.registration(values.fullName, values.login, values.password,).then(
-        /**
-         *
-         * @param result
-         */
         result => {
             registrationRequestSuccessful(result.data.messages, result.data.auth_token);
         },

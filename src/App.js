@@ -3,6 +3,7 @@ import {Route} from 'react-router'
 import RegistrationPage from "./components/CenterPaper";
 import PrivateRoute from "./components/PrivateRoute";
 import {BrowserRouter} from 'react-router-dom'
+import UserPanel from "./components/UserPanel";
 
 
 class App extends Component {
@@ -33,14 +34,6 @@ class Home extends Component {
 	render() {
 		return (
 			<h1>This is home</h1>
-		);
-	}
-}
-
-class UserPanel extends Component {
-	render() {
-		return (
-			<h1>This is user panel</h1>
 		);
 	}
 }

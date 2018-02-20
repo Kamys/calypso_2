@@ -1,21 +1,21 @@
-import React from 'react';
-import {withStyles} from 'material-ui/styles';
-import Grid from 'material-ui/Grid/Grid';
+import React from "react";
+import {withStyles} from "material-ui/styles";
+import Grid from "material-ui/Grid/Grid";
 import Paper from "material-ui/es/Paper/Paper";
 import RegistrationForm from "./RegistrationForm";
 
 
-const RegistrationPageStyles = theme => ({
+const styles = theme => ({
 	root: {
 		flexGrow: 1,
 		height: "500px",
 	},
 	paper: {
 		padding: theme.spacing.unit * 2,
-		height: '100%'
+		height: "100%"
 	},
 	container: {
-		height: '500px'
+		height: "500px"
 	}
 });
 
@@ -42,6 +42,6 @@ class RegistrationPage extends React.Component {
 	}
 }
 
-export default withStyles(RegistrationPageStyles)(RegistrationPage);
+export default withStyles(styles)(RegistrationPage);
 
 

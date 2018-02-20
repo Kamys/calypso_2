@@ -22,7 +22,7 @@ const PrivateRoute = ({component: Component, ...rest}) => (
 );
 
 function checkUserAuthorization() {
-	let authToken = Api.getAuthToken();
+	let authToken = Api.ping();
 	return !!authToken;
 }
 

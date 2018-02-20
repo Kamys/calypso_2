@@ -10,7 +10,7 @@ import Yup from "yup";
 import {connect} from "react-redux";
 import registrationRequest from "../redux/actions/registrationRequest"
 
-const RegistrationFormStyles = () => ({
+const styles = () => ({
 	errorMessages: {
 		color: "#E91E63",
 	},
@@ -157,7 +157,7 @@ const RegistrationFormik = withFormik({
 		FormikBag.props.onRegistrationRequest(values);
 	},
 	displayName: 'RegistrationFormik',
-})(withStyles(RegistrationFormStyles)(RegistrationForm));
+})(withStyles(styles)(RegistrationForm));
 
 const mapStateToProps = (state) => {
 	return {
