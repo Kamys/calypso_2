@@ -27,7 +27,8 @@ class AlertDialog extends Component {
                     <DialogTitle id="alert-dialog-title">{"Подсказка"}</DialogTitle>
                     <DialogContent>
                         <DialogContentText id="alert-dialog-description">
-                            Для изменения тексте в тесте нажмите два раза на текст.
+                            Для изменения текста на карточке нажмите два раза на текст.<br/>
+                            * Сохранение тестов происходит локально.
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions>
