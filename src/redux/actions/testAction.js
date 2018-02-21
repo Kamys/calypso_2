@@ -1,11 +1,9 @@
 import EventName from "../EventName";
 
+//TODO: add method API
 
-const addTest = (title, description) => dispatch => {
-    dispatch({
-        type: EventName.TEST.ADD_TEST,
-        data: {title, description}
-    })
+const addTest = () => dispatch => {
+    dispatch({type: EventName.TEST.ADD_TEST})
 };
 
 const deleteTest = (id) => dispatch => {

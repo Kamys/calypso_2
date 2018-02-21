@@ -8,13 +8,18 @@ function initState() {
     ]
 }
 
+let idCounter = 3;
+
 export default function testReducer(state = initState(), action) {
     if (action.type === EventName.TEST.ADD_TEST) {
-        return [...state, action.data];
+        idCounter++;
+        return [...state, {id: idCounter, title: "Заголовок", description: "Описание"}];
+
     } else if (action.type === EventName.TEST.EDIT_TEST) {
         let newTest = action.data;
         let newState = state.filter(test => test.id !== newTest.id);
         return [...newState, newTest].sort((testFirst, testSecond) => testFirst.id - testSecond.id)
+
     } else if (action.type === EventName.TEST.DELETE_TEST) {
         let removedTestId = action.data;
         let newState = state.filter(test => test.id !== removedTestId);

@@ -101,7 +101,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         onAddTest: () => {
-            dispatch(addTest("Test", "Description"))
+            dispatch(addTest())
         }
     }
 };
