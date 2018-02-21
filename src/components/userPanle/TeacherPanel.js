@@ -9,7 +9,7 @@ import Grid from "material-ui/Grid/Grid";
 import Test from "./Test";
 import Button from "material-ui/es/Button/Button";
 import AddIcon from 'material-ui-icons/Add';
-import {addTest} from "../../redux/actions/TestAction";
+import {addTest} from "../../redux/actions/testAction";
 
 const styles = {
     root: {
@@ -35,12 +35,12 @@ let TestList = (props) => {
     let listTest = props.tests;
     return listTest.map(test => (
         <Grid key={test.id} item>
-            <Test title={test.title} description={test.description}/>
+            <Test id={test.id} title={test.title} description={test.description}/>
         </Grid>
     ));
 };
 
-let NavAppBar = (props) =>(
+let NavAppBar = (props) => (
     <AppBar position="fixed" color="default" className={props.classes.appBar}>
         <Toolbar>
             <Typography variant="title" color="inherit" className={props.classes.flex}>
@@ -55,6 +55,8 @@ let NavAppBar = (props) =>(
 
 
 class TeacherPanel extends Component {
+
+
     render() {
         return (
             <div>
@@ -77,7 +79,6 @@ class TeacherPanel extends Component {
                     bottom: 20,
                     left: "auto",
                     position: "fixed",
-
                 }}>
                     <AddIcon/>
                 </Button>

@@ -13,7 +13,8 @@ const EventName = {
     },
     TEST: {
         ADD_TEST: "ADD_TEST",
-        DELETE_TEST: "DELETE_TEST"
+        DELETE_TEST: "DELETE_TEST",
+        EDIT_TEST: "EDIT_TEST"
     }
 };
 

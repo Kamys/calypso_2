@@ -17,7 +17,8 @@ class TypographyEdit extends Component {
         super(props);
         this.state = {
             isEdit: false,
-            firstClick: false
+            firstClick: false,
+            value: this.props.children.props.children
         };
     }
 
@@ -30,16 +31,16 @@ class TypographyEdit extends Component {
     };
 
     onBlurHandler = () => {
-        this.setState({isEdit: false})
+        this.setState({isEdit: false});
+        this.props.onChangeComplete(this.state.value);
     };
 
     onChangeHandler = (e) => {
-        this.setState({text: e.target.value});
+        this.setState({value: e.target.value});
     };
 
     render() {
         const {children} = this.props;
-        this.state.text = this.state.text || children.props.children;
 
         if (this.state.isEdit) {
             return (
@@ -48,7 +49,7 @@ class TypographyEdit extends Component {
                            onChange={this.onChangeHandler}
                            className={this.props.classes.textField}
                            id="name"
-                           value={this.state.text}
+                           value={this.state.value}
                            margin="none"/>
             )
         }

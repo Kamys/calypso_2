@@ -11,6 +11,10 @@ function initState() {
 export default function testReducer(state = initState(), action) {
     if (action.type === EventName.TEST.ADD_TEST) {
         return [...state, action.data];
+    } else if (action.type === EventName.TEST.EDIT_TEST) {
+        let newTest = action.data;
+        let newState = state.filter(test => test.id !== newTest.id);
+        return [...newState, newTest].sort((testFirst, testSecond) => testFirst.id - testSecond.id)
     }
     return state;
 }

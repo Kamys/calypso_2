@@ -8,6 +8,8 @@ import Typography from 'material-ui/Typography';
 import Tooltip from "material-ui/es/Tooltip/Tooltip";
 import Grid from "material-ui/es/Grid/Grid";
 import TypographyEdit from "../TypographyEdit";
+import {connect} from "react-redux";
+import {editTest} from "../../redux/actions/testAction";
 
 
 const styles = theme => ({
@@ -33,21 +35,40 @@ const styles = theme => ({
 
 class Test extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {}
+    }
+
+    onChangeTitle = (newTitle) => {
+        const {id, description} = this.props;
+        this.props.onChangeTest({id, title: newTitle, description});
+    };
+
+    onChangeDescription = (newDescription) => {
+        const {id, title} = this.props;
+        this.props.onChangeTest({id, title, description: newDescription});
+    };
+
+
     render() {
+        const {title, description} = this.props;
         return (
             <Card className={this.props.classes.card}>
                 <CardContent>
-                    <TypographyEdit>
+                    <TypographyEdit onChangeComplete={this.onChangeTitle}>
                         <Typography component="h2" variant="title"
                                     className={this.props.classes.typography}>
-                            {this.props.title}
+                            {title}
                         </Typography>
                     </TypographyEdit>
                     <Grid container wrap="nowrap">
                         <Grid item xs>
-                            <Typography component="p">
-                                {this.props.description}
-                            </Typography>
+                            <TypographyEdit onChangeComplete={this.onChangeDescription}>
+                                <Typography component="p">
+                                    {description}
+                                </Typography>
+                            </TypographyEdit>
                         </Grid>
                     </Grid>
                 </CardContent>
@@ -57,15 +78,29 @@ class Test extends Component {
                             <DeleteIcon/>
                         </IconButton>
                     </Tooltip>
-                    <Tooltip id="tooltip-fab" title="Редактировать тест">
-                        <IconButton>
-                            <EditIcon/>
-                        </IconButton>
-                    </Tooltip>
                 </CardActions>
             </Card>
         );
     }
 }
 
-export default withStyles(styles)(Test);
+
+const mapStateToProps = (state) => {
+    return {
+        testReducer: state.testReducer
+    }
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        onChangeTest: (test) => {
+            dispatch(editTest(test))
+        }
+    }
+};
+
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps)
+(withStyles(styles)(Test));
