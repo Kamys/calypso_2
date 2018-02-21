@@ -4,18 +4,19 @@ import RegistrationPage from "./components/CenterPaper";
 import PrivateRoute from "./components/PrivateRoute";
 import {BrowserRouter, Link} from 'react-router-dom'
 import UserPanel from "./components/userPanle/TeacherPanel";
+import Switch from "react-router-dom/es/Switch";
 
 
 class App extends Component {
     render() {
         return (
             <BrowserRouter>
-                <div>
+                <Switch>
                     <Route exact path="/" component={Home}/>
                     <Route path="/login" component={Login}/>
                     <Route path="/registration" component={RegistrationPage}/>
-                    <PrivateRoute path="/userPanel" component={UserPanel}/>
-                </div>
+                    <PrivateRoute path="/teacherPanel" component={UserPanel}/>
+                </Switch>
             </BrowserRouter>
         );
     }

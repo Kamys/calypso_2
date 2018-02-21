@@ -57,8 +57,13 @@ let NavAppBar = (props) => (
 
 class TeacherPanel extends Component {
 
+    shouldComponentUpdate(nextProps, nextState){
+        debugger
+    }
+
 
     render() {
+        debugger
         return (
             <div>
                 <NavAppBar {...this.props}/>
