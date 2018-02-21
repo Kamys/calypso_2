@@ -3,13 +3,12 @@ import {withStyles} from 'material-ui/styles';
 import Card, {CardActions, CardContent} from 'material-ui/Card';
 import IconButton from 'material-ui/IconButton';
 import DeleteIcon from 'material-ui-icons/Delete';
-import EditIcon from 'material-ui-icons/Edit';
 import Typography from 'material-ui/Typography';
 import Tooltip from "material-ui/es/Tooltip/Tooltip";
 import Grid from "material-ui/es/Grid/Grid";
 import TypographyEdit from "../TypographyEdit";
 import {connect} from "react-redux";
-import {editTest} from "../../redux/actions/testAction";
+import {editTest, deleteTest} from "../../redux/actions/testAction";
 
 
 const styles = theme => ({
@@ -50,6 +49,11 @@ class Test extends Component {
         this.props.onChangeTest({id, title, description: newDescription});
     };
 
+    onClickDelete = () => {
+        this.props.onDeleteTest(this.props.id);
+    };
+
+
 
     render() {
         const {title, description} = this.props;
@@ -74,7 +78,7 @@ class Test extends Component {
                 </CardContent>
                 <CardActions>
                     <Tooltip id="tooltip-fab" title="Удалить тест">
-                        <IconButton>
+                        <IconButton onClick={this.onClickDelete}>
                             <DeleteIcon/>
                         </IconButton>
                     </Tooltip>
@@ -86,16 +90,17 @@ class Test extends Component {
 
 
 const mapStateToProps = (state) => {
-    return {
-        testReducer: state.testReducer
-    }
+    return {}
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         onChangeTest: (test) => {
             dispatch(editTest(test))
-        }
+        },
+        onDeleteTest: (id) => {
+            dispatch(deleteTest(id))
+        },
     }
 };
 

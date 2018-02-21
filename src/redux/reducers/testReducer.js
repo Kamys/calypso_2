@@ -15,6 +15,11 @@ export default function testReducer(state = initState(), action) {
         let newTest = action.data;
         let newState = state.filter(test => test.id !== newTest.id);
         return [...newState, newTest].sort((testFirst, testSecond) => testFirst.id - testSecond.id)
+    } else if (action.type === EventName.TEST.DELETE_TEST) {
+        let removedTestId = action.data;
+        let newState = state.filter(test => test.id !== removedTestId);
+        return [...newState].sort((testFirst, testSecond) => testFirst.id - testSecond.id)
     }
+
     return state;
 }

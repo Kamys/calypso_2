@@ -9,7 +9,7 @@ const addTest = (title, description) => dispatch => {
 };
 
 const deleteTest = (id) => dispatch => {
-    dispatch({type: EventName.TEST.ADD_TEST})
+    dispatch({type: EventName.TEST.DELETE_TEST, data: id})
 };
 
 const editTest = (test) => dispatch => {
