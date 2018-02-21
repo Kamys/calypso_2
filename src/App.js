@@ -12,9 +12,9 @@ class App extends Component {
             <BrowserRouter>
                 <div>
                     <Route exact path="/" component={Home}/>
-                    <Route exact path="/login" component={Login}/>
-                    <Route exact path="/registration" component={RegistrationPage}/>
-                    <PrivateRoute exact path="/userPanel" component={UserPanel}/>
+                    <Route path="/login" component={Login}/>
+                    <Route path="/registration" component={RegistrationPage}/>
+                    <PrivateRoute path="/userPanel" component={UserPanel}/>
                 </div>
             </BrowserRouter>
         );
@@ -33,7 +33,10 @@ class Login extends Component {
 class Home extends Component {
     render() {
         return (
-            <h1>This is home</h1>
+            <div style={{paddingLeft: 30}}>
+                <h1>This is home</h1>
+                <Link to="/registration">Регистрация</Link>
+            </div>
         );
     }
 }

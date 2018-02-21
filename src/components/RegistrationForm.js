@@ -9,6 +9,7 @@ import {withStyles} from "material-ui/styles/index";
 import Yup from "yup";
 import {connect} from "react-redux";
 import registrationRequest from "../redux/actions/registrationRequest"
+import Redirect from "react-router-dom/es/Redirect";
 
 const styles = () => ({
 	errorMessages: {
@@ -38,6 +39,15 @@ class RegistrationForm extends React.Component {
         if(!isRegistrationSuccessful){
             errorMessagesClassName = this.props.classes.errorMessages;
         }
+
+        if(isRegistrationSuccessful){
+        	return (
+                <Redirect to={{
+                    pathname: '/userPanel',
+                    state: {from: this.props.location}
+                }}/>
+			)
+		}
 
 
 		return (
