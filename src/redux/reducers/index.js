@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
-import registration from './registration';
-import userAccount from './userAccount';
+import registration from './registrationReducer';
+import userAccount from './userAccountReducer';
 import loading from './loadingReducer';
 import testReducer from "./testReducer";
 

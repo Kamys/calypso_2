@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import Redirect from "react-router-dom/es/Redirect";
 import Route from "react-router-dom/es/Route";
-import checkAutorisation from "../redux/actions/checkAutorisation";
+import checkAutorisation from "../redux/actions/autorisationAction";
 import {connect} from "react-redux";
 
 class PrivateRoute extends React.Component {

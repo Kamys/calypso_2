@@ -8,7 +8,7 @@ import {setLocale} from "yup/lib/customLocale"
 import {withStyles} from "material-ui/styles/index";
 import Yup from "yup";
 import {connect} from "react-redux";
-import registrationRequest from "../redux/actions/registrationRequest"
+import registrationRequest from "../redux/actions/registrationAction"
 import Redirect from "react-router-dom/es/Redirect";
 
 const styles = () => ({
