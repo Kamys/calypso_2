@@ -1,4 +1,5 @@
 import EventName from "../EventName";
+import uuidv1 from "uuid/v1";
 
 function initState() {
     const defaultTests = [
@@ -10,19 +11,15 @@ function initState() {
     return JSON.parse(localStorage.getItem("tests")) || defaultTests;
 }
 
-let idCounter = 3;
-
 function saveInStore(newState) {
     localStorage.setItem("tests", JSON.stringify(newState));
 }
 
 export default function testReducer(state = initState(), action) {
     if (action.type === EventName.TEST.ADD_TEST) {
-        idCounter++;
-        let newState = [...state, {id: idCounter, title: "Заголовок", description: "Описание"}];
+        let newState = [...state, {id: uuidv1(), title: "Заголовок", description: "Описание"}];
         saveInStore(newState);
         return newState;
-
     } else if (action.type === EventName.TEST.EDIT_TEST) {
         let newTest = action.data;
         let filterState = state.filter(test => test.id !== newTest.id);
