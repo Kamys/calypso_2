@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import {withStyles} from 'material-ui/styles';
 import Card, {CardActions, CardContent} from 'material-ui/Card';
 import IconButton from 'material-ui/IconButton';
@@ -8,6 +7,8 @@ import EditIcon from 'material-ui-icons/Edit';
 import Typography from 'material-ui/Typography';
 import Tooltip from "material-ui/es/Tooltip/Tooltip";
 import Grid from "material-ui/es/Grid/Grid";
+import TypographyEdit from "../TypographyEdit";
+
 
 const styles = theme => ({
     card: {
@@ -16,9 +17,9 @@ const styles = theme => ({
         maxHeight: 500,
     },
     bullet: {
-        display: 'inline-block',
-        margin: '0 2px',
-        transform: 'scale(0.8)',
+        display: "inline-block",
+        margin: "0 2px",
+        transform: "scale(0.8)",
     },
     title: {
         marginBottom: 16,
@@ -31,13 +32,17 @@ const styles = theme => ({
 
 
 class Test extends Component {
+
     render() {
         return (
             <Card className={this.props.classes.card}>
                 <CardContent>
-                    <Typography component="h2" variant="title" className={this.props.classes.title}>
-                        {this.props.title}
+                    <TypographyEdit>
+                        <Typography component="h2" variant="title"
+                                    className={this.props.classes.typography}>
+                            {this.props.title}
                         </Typography>
+                    </TypographyEdit>
                     <Grid container wrap="nowrap">
                         <Grid item xs>
                             <Typography component="p">

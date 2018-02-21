@@ -3,7 +3,7 @@ import {withStyles} from 'material-ui/styles';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
-import "./UserPanel.css"
+import "./TeacherPanel.css"
 import {connect} from "react-redux";
 import Grid from "material-ui/Grid/Grid";
 import Test from "./Test";
@@ -34,7 +34,7 @@ const styles = {
 let TestList = (props) => {
     let listTest = props.tests;
     return listTest.map(test => (
-        <Grid item>
+        <Grid key={test.id} item>
             <Test title={test.title} description={test.description}/>
         </Grid>
     ));

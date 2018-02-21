@@ -3,7 +3,7 @@ import {Route} from 'react-router'
 import RegistrationPage from "./components/CenterPaper";
 import PrivateRoute from "./components/PrivateRoute";
 import {BrowserRouter, Link} from 'react-router-dom'
-import UserPanel from "./components/userPanle/UserPanel";
+import UserPanel from "./components/userPanle/TeacherPanel";
 
 
 class App extends Component {

@@ -2,9 +2,9 @@ import EventName from "../EventName";
 
 function initState() {
     return [
-        {title: "Информатика", description: "Тест по информатики за 2 кус."},
-        {title: "История", description: "Тест по теме древний рим."},
-        {title: "Физика", description: "Тест по квантовой теории."},
+        {id: 1, title: "Информатика", description: "Тест по информатики за 2 кус."},
+        {id: 2, title: "История", description: "Тест по теме древний рим."},
+        {id: 3, title: "Физика", description: "Тест по квантовой теории."},
     ]
 }
 
