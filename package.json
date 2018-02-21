@@ -9,7 +9,7 @@
     "prop-types": "latest",
     "redux": "^3.7.2",
     "redux-devtools-extension": "^2.13.2",
-    "redux-thunk": "^2.2.0",
+    "redux-saga": "^0.16.0",
     "typeface-roboto": "^0.0.54",
     "uuid": "^3.2.1",
     "yup": "^0.24.1"

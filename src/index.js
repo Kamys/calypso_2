@@ -6,9 +6,17 @@ import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
 import reducer from './redux/reducers';
 import {composeWithDevTools} from 'redux-devtools-extension';
-import thunk from 'redux-thunk';
+import registrationSaga from './redux/saga/registrationSaga'
+import createSagaMiddleware from 'redux-saga'
 
-const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
+
+const sagaMiddleware = createSagaMiddleware();
+
+const store = createStore(
+	reducer,
+	composeWithDevTools(applyMiddleware(sagaMiddleware)));
+
+sagaMiddleware.run(registrationSaga);
 
 ReactDOM.render(
 	<Provider store={store}>

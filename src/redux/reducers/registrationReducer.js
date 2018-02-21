@@ -1,14 +1,21 @@
 import EventName from "../EventName";
 
 function initState() {
-	return {
-        message: []
-	}
+    return {
+        messages: []
+    }
 }
 
 export default function registration(state = initState(), action) {
-	if (action.type === EventName.REGISTRATION.REGISTER_REQUEST) {
-		return action.data;
-	}
-	return state;
+    switch (action.type) {
+        case EventName.REGISTRATION.REGISTER_SUCCESS:
+            debugger
+            return action.response;
+        case EventName.REGISTRATION.REGISTER_FAIL:
+            debugger
+            state.messages = action.response.data.messages;
+            return state;
+        default:
+            return state
+    }
 }
