@@ -1,29 +1,41 @@
 import EventName from "../EventName";
 
 function initState() {
-    return [
+    const defaultTests = [
         {id: 1, title: "Информатика", description: "Тест по информатики за 2 кус."},
         {id: 2, title: "История", description: "Тест по теме древний рим."},
         {id: 3, title: "Физика", description: "Тест по квантовой теории."},
-    ]
+    ];
+
+    return JSON.parse(localStorage.getItem("tests")) || defaultTests;
 }
 
 let idCounter = 3;
 
+function saveInStore(newState) {
+    localStorage.setItem("tests", JSON.stringify(newState));
+}
+
 export default function testReducer(state = initState(), action) {
     if (action.type === EventName.TEST.ADD_TEST) {
         idCounter++;
-        return [...state, {id: idCounter, title: "Заголовок", description: "Описание"}];
+        let newState = [...state, {id: idCounter, title: "Заголовок", description: "Описание"}];
+        saveInStore(newState);
+        return newState;
 
     } else if (action.type === EventName.TEST.EDIT_TEST) {
         let newTest = action.data;
-        let newState = state.filter(test => test.id !== newTest.id);
-        return [...newState, newTest].sort((testFirst, testSecond) => testFirst.id - testSecond.id)
+        let filterState = state.filter(test => test.id !== newTest.id);
+        let newState = [...filterState, newTest].sort((testFirst, testSecond) => testFirst.id - testSecond.id);
+        saveInStore(newState);
+        return newState;
 
     } else if (action.type === EventName.TEST.DELETE_TEST) {
         let removedTestId = action.data;
-        let newState = state.filter(test => test.id !== removedTestId);
-        return [...newState].sort((testFirst, testSecond) => testFirst.id - testSecond.id)
+        let filterState = state.filter(test => test.id !== removedTestId);
+        let newState = [...filterState].sort((testFirst, testSecond) => testFirst.id - testSecond.id);
+        saveInStore(newState);
+        return newState;
     }
 
     return state;
