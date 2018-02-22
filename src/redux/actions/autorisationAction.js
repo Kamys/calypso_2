@@ -9,4 +9,8 @@ const autorisationSuccess = () => {
     return {type: AUTORISATION.AUTORISATION_SUCCESS};
 };
 
-export {autorisationRequest, autorisationSuccess};
+const autorisationFail = () => {
+    return {type: AUTORISATION.AUTORISATION_FAIL};
+};
+
+export {autorisationRequest, autorisationSuccess, autorisationFail};

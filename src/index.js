@@ -6,7 +6,7 @@ import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
 import reducer from './redux/reducers';
 import {composeWithDevTools} from 'redux-devtools-extension';
-import rootSaga from './redux/saga/saga'
+import rootSaga from './redux/saga/rootSaga'
 import createSagaMiddleware from 'redux-saga'
 
 

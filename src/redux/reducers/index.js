@@ -8,5 +8,4 @@ export default combineReducers({
 	registration,
     autorisation,
     testReducer
-
 });

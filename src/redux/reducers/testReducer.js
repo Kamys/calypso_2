@@ -7,7 +7,6 @@ function initState() {
         {id: 2, title: "История", description: "Тест по теме древний рим."},
         {id: 3, title: "Физика", description: "Тест по квантовой теории."},
     ];
-
     return JSON.parse(localStorage.getItem("tests")) || defaultTests;
 }
 
