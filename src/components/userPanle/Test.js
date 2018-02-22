@@ -3,12 +3,14 @@ import {withStyles} from 'material-ui/styles';
 import Card, {CardActions, CardContent} from 'material-ui/Card';
 import IconButton from 'material-ui/IconButton';
 import DeleteIcon from 'material-ui-icons/Delete';
+import EditIcon from 'material-ui-icons/Edit';
 import Typography from 'material-ui/Typography';
 import Tooltip from "material-ui/es/Tooltip/Tooltip";
 import Grid from "material-ui/es/Grid/Grid";
 import TypographyEdit from "../TypographyEdit";
 import {connect} from "react-redux";
 import {editTest, deleteTest} from "../../redux/actions/testAction";
+import {openEditTestModal} from "../../redux/actions/teacherPanelAction";
 
 
 const styles = theme => ({
@@ -53,6 +55,10 @@ class Test extends Component {
         this.props.onDeleteTest(this.props.id);
     };
 
+    onClickEdit = () => {
+        this.props.onOpenEditTestModal(this.props.id);
+    };
+
 
 
     render() {
@@ -82,6 +88,11 @@ class Test extends Component {
                             <DeleteIcon/>
                         </IconButton>
                     </Tooltip>
+                    <Tooltip id="tooltip-fab" title="Редактировать">
+                        <IconButton onClick={this.onClickEdit}>
+                            <EditIcon/>
+                        </IconButton>
+                    </Tooltip>
                 </CardActions>
             </Card>
         );
@@ -90,7 +101,9 @@ class Test extends Component {
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+        teacherPanel: state.teacherPanel
+    }
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
@@ -100,6 +113,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         onDeleteTest: (id) => {
             dispatch(deleteTest(id))
+        },
+        onOpenEditTestModal: (id) => {
+            dispatch(openEditTestModal(id))
         },
     }
 };

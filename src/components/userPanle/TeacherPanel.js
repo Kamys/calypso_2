@@ -10,6 +10,7 @@ import Test from "./Test";
 import Button from "material-ui/es/Button/Button";
 import AddIcon from 'material-ui-icons/Add';
 import {addTest} from "../../redux/actions/testAction";
+import ModalEditTest from "./ModalEditTest";
 
 const styles = {
     root: {
@@ -81,6 +82,7 @@ class TeacherPanel extends Component {
                 }}>
                     <AddIcon/>
                 </Button>
+                <ModalEditTest/>
             </div>
         );
     }
