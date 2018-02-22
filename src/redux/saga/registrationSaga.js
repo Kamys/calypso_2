@@ -1,9 +1,9 @@
-import { call, put, takeLatest } from 'redux-saga/effects'
+import {call, put, take, all, fork} from 'redux-saga/effects'
 import Api from './../../api/Api'
 import EventName from "../EventName";
 
 
-function* fetchUser(action) {
+function* registration(action) {
     try {
         let user = action.data;
         const response = yield call(Api.registration, user.fullName, user.login, user.password);
@@ -13,9 +13,11 @@ function* fetchUser(action) {
     }
 }
 
-
 function* registrationSaga() {
-    yield takeLatest(EventName.REGISTRATION.REGISTER_REQUEST, fetchUser);
+    while (true){
+        const action = yield take(EventName.REGISTRATION.REGISTER_REQUEST);
+        yield call(registration, action);
+    }
 }
 
-export default registrationSaga;
+export {registrationSaga}

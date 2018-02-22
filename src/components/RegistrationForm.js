@@ -8,7 +8,7 @@ import {setLocale} from "yup/lib/customLocale"
 import {withStyles} from "material-ui/styles/index";
 import Yup from "yup";
 import {connect} from "react-redux";
-import registrationAction from "../redux/actions/registrationAction"
+import {registrationRequest} from "../redux/actions/registrationAction"
 import Redirect from "react-router-dom/es/Redirect";
 import Link from "react-router-dom/es/Link";
 import Route from "react-router-dom/es/Route";
@@ -179,7 +179,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         onRegistrationRequest: (values) => {
-            dispatch(registrationAction(values))
+            dispatch(registrationRequest(values))
         }
     }
 };

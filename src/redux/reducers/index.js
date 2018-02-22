@@ -1,13 +1,13 @@
 import { combineReducers } from 'redux';
 
 import registration from './registrationReducer';
-import userAccount from './userAccountReducer';
+import autorisation from './autorisationReducer';
 import loading from './loadingReducer';
 import testReducer from "./testReducer";
 
 export default combineReducers({
 	registration,
-    userAccount,
+    autorisation,
     loading,
     testReducer
 

@@ -31,7 +31,7 @@ class Api {
         return localStorage.getItem(Api.keyAuthToken);
     };
 
-    static ping = () => {
+    static autorisation = () => {
         const data = {
             token: Api.getAuthToken(),
         };
@@ -48,7 +48,7 @@ class Api {
             let url = Api.apiUrl + methodName;
             console.log("========= Request =========");
             console.log("Request url - ", url);
-            console.log("Request data - ", data);
+            console.log("Request data - ", JSON.stringify(data));
             fetch(url, {
                 method: "POST",
                 body: JSON.stringify(data),
@@ -59,13 +59,14 @@ class Api {
             })
                 .then((response) => response.json())
                 .then((json) => handleResponse(json))
+                .then((json) => {
+                    console.log("Response data = ", JSON.stringify(json));
+                    console.log("==================");
+                    return json;
+                })
                 .catch((e) => {
                     console.error("Failed executeRequest!", e);
-                }).finally((json) => {
-                console.log("Response data = ", json);
-                console.log("==================");
-                return json;
-            });
+                });
 
             function handleResponse(json) {
                 if (json.status) {

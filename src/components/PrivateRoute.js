@@ -1,8 +1,9 @@
 import React, {Component} from 'react'
 import Redirect from "react-router-dom/es/Redirect";
 import Route from "react-router-dom/es/Route";
-import checkAutorisation from "../redux/actions/autorisationAction";
+import {autorisationRequest} from "../redux/actions/autorisationAction";
 import {connect} from "react-redux";
+import autorisation from "../redux/reducers/autorisationReducer";
 
 class PrivateRoute extends React.Component {
 
@@ -11,9 +12,9 @@ class PrivateRoute extends React.Component {
     }
 
     render() {
-        const {component: Component, ...rest} = this.props;
+        const {component: Component, autorisation, ...rest} = this.props;
 
-        const dataLoading = this.props.loading.isDataLoading;
+        const dataLoading = autorisation.isLoading;
         if (dataLoading) {
             return(
                 <h1>Loading....</h1>
@@ -21,8 +22,8 @@ class PrivateRoute extends React.Component {
         }
 
         return (
-            <Route {...rest} render={(props) => {
-                return this.props.userAccount.isAutorisationSuccessful ? (
+            <Route exact {...rest} render={(props) => {
+                return autorisation.isAutorisationSuccessful ? (
                     <Component {...props} />
                 ) : (
                     <Redirect to={{
@@ -37,15 +38,14 @@ class PrivateRoute extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        userAccount: state.userAccount,
-        loading: state.loading
+        autorisation: state.autorisation,
     }
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         onCheckAutorisation: () => {
-            dispatch(checkAutorisation())
+            dispatch(autorisationRequest())
         }
     }
 };

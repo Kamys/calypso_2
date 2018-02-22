@@ -47,7 +47,7 @@ let NavAppBar = (props) => (
                 Панель пользователя
             </Typography>
             <Typography variant="title" color="primary">
-                {props.userAccount.fullName}
+                {props.autorisation.fullName}
             </Typography>
         </Toolbar>
     </AppBar>
@@ -92,7 +92,7 @@ class TeacherPanel extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        userAccount: state.userAccount,
+        autorisation: state.autorisation,
         testReducer: state.testReducer,
     }
 };
