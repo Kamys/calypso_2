@@ -3,6 +3,7 @@ import Modal from 'material-ui/Modal';
 import Typography from "material-ui/es/Typography/Typography";
 import {withStyles} from 'material-ui/styles';
 import {addTest} from "../../redux/actions/testAction";
+import {closeEditTestModal} from "../../redux/actions/teacherPanelAction";
 import {connect} from "react-redux";
 
 const styles = theme => ({
@@ -13,12 +14,18 @@ const styles = theme => ({
         boxShadow: theme.shadows[5],
         padding: theme.spacing.unit * 4,
     },
+    modal: {
+        position: "fixed",
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+    }
 });
 
 class ModalEditTest extends Component {
 
     handleClose = () => {
-        this.setState({open: false});
+        this.props.onCloseEditTestModal();
     };
 
 
@@ -28,10 +35,13 @@ class ModalEditTest extends Component {
         console.log("Modal data = ", teacherPanel);
         return (
             <Modal
+                className={classes.modal}
                 aria-labelledby="simple-modal-title"
                 aria-describedby="simple-modal-description"
                 open={teacherPanel.isOpenEditTestModal}
+                onBackdropClick={this.handleClose}
                 onClose={this.handleClose}>
+
                 <div className={classes.paper}>
                     <Typography variant="title" id="modal-title">
                         Text in a modal
@@ -45,8 +55,6 @@ class ModalEditTest extends Component {
     }
 }
 
-const ModalEditTestWrapped = withStyles(styles)(ModalEditTest);
-
 const mapStateToProps = (state) => {
     return {
         teacherPanel: state.teacherPanel
@@ -55,9 +63,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        /*onAddTest: () => {
-            dispatch(addTest())
-        }*/
+        onCloseEditTestModal: () => {
+            dispatch(closeEditTestModal())
+        }
     }
 };
 
@@ -65,4 +73,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps)
-(ModalEditTestWrapped);
+(withStyles(styles)(ModalEditTest));
