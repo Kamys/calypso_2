@@ -1,12 +1,12 @@
-import EventName from "../EventName";
+import {AUTORISATION} from "../EventName";
 
 
 const autorisationRequest = () => {
-    return {type: EventName.AUTORISATION.AUTORISATION_REQUEST};
+    return {type: AUTORISATION.AUTORISATION_REQUEST};
 };
 
 const autorisationSuccess = () => {
-    return {type: EventName.AUTORISATION.AUTORISATION_SUCCESS};
+    return {type: AUTORISATION.AUTORISATION_SUCCESS};
 };
 
 export {autorisationRequest, autorisationSuccess};

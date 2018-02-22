@@ -1,21 +1,21 @@
-import {call, put, take, all, fork} from 'redux-saga/effects'
+import {call, put, take} from 'redux-saga/effects'
 import Api from './../../api/Api'
-import EventName from "../EventName";
+import {REGISTRATION} from "../EventName";
 
 
 function* registration(action) {
     try {
-        let user = action.data;
-        const response = yield call(Api.registration, user.fullName, user.login, user.password);
-        yield put({type: EventName.REGISTRATION.REGISTER_SUCCESS, response});
-    } catch (response) {
-        yield put({type: EventName.REGISTRATION.REGISTER_FAIL, response});
+        let user = action.payload;
+        const payload = yield call(Api.registration, user.fullName, user.login, user.password);
+        yield put({type: REGISTRATION.REGISTER_SUCCESS, payload});
+    } catch (payload) {
+        yield put({type: REGISTRATION.REGISTER_FAIL, payload});
     }
 }
 
 function* registrationSaga() {
-    while (true){
-        const action = yield take(EventName.REGISTRATION.REGISTER_REQUEST);
+    while (true) {
+        const action = yield take(REGISTRATION.REGISTER_REQUEST);
         yield call(registration, action);
     }
 }

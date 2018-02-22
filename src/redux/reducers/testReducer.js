@@ -1,4 +1,4 @@
-import EventName from "../EventName";
+import {TEST} from "../EventName";
 import uuidv1 from "uuid/v1";
 
 function initState() {
@@ -16,18 +16,18 @@ function saveInStore(newState) {
 }
 
 export default function testReducer(state = initState(), action) {
-    if (action.type === EventName.TEST.ADD_TEST) {
+    if (action.type === TEST.ADD_TEST) {
         let newState = [...state, {id: uuidv1(), title: "Заголовок", description: "Описание"}];
         saveInStore(newState);
         return newState;
-    } else if (action.type === EventName.TEST.EDIT_TEST) {
+    } else if (action.type === TEST.EDIT_TEST) {
         let newTest = action.data;
         let filterState = state.filter(test => test.id !== newTest.id);
         let newState = [...filterState, newTest].sort((testFirst, testSecond) => testFirst.id - testSecond.id);
         saveInStore(newState);
         return newState;
 
-    } else if (action.type === EventName.TEST.DELETE_TEST) {
+    } else if (action.type === TEST.DELETE_TEST) {
         let removedTestId = action.data;
         let filterState = state.filter(test => test.id !== removedTestId);
         let newState = [...filterState].sort((testFirst, testSecond) => testFirst.id - testSecond.id);

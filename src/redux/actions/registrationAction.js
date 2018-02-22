@@ -1,12 +1,15 @@
-import EventName from "../EventName";
+import {REGISTRATION} from "../EventName";
 
-
-const registrationRequest = (values) => {
-    return {type: EventName.REGISTRATION.REGISTER_REQUEST, data: values};
+const registrationRequest = (payload) => {
+    return {type: REGISTRATION.REGISTER_REQUEST, payload};
 };
 
-const registrationSuccess = (values) => {
-    return {type: EventName.REGISTRATION.REGISTER_SUCCESS, data: values};
+const registrationSuccess = (payload) => {
+    return {type: REGISTRATION.REGISTER_SUCCESS, payload};
 };
 
-export {registrationRequest, registrationSuccess};
+const registrationFail = (payload) => {
+    return {type: REGISTRATION.REGISTER_FAIL, payload};
+};
+
+export {registrationRequest, registrationSuccess, registrationFail};
