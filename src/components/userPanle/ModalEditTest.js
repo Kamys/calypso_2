@@ -39,7 +39,6 @@ class ModalEditTest extends Component {
                 open={teacherPanel.isOpenEditTestModal}
                 onBackdropClick={this.handleClose}
                 onClose={this.handleClose}>
-
                 <div className={classes.paper}>
                     <EditTestFormFormik/>
                 </div>

@@ -7,6 +7,14 @@ import {setLocale} from "yup/lib/customLocale";
 import {connect} from "react-redux";
 import {editTest} from "../../redux/actions/testAction";
 import {closeEditTestModal} from "../../redux/actions/teacherPanelAction";
+import {withStyles} from "material-ui/styles/index";
+
+
+const styles = theme => ({
+    textField: {
+        width:"100%"
+    },
+});
 
 class EditTestForm extends Component {
     render() {
@@ -18,6 +26,7 @@ class EditTestForm extends Component {
             handleChange,
             handleBlur,
             handleSubmit,
+            classes
         } = this.props;
 
         return (
@@ -29,6 +38,7 @@ class EditTestForm extends Component {
                     <Grid container>
                         <Grid item xs={12}>
                             <TextField
+                                className={classes.textField}
                                 id="title"
                                 label="Заголовок"
                                 margin="normal"
@@ -39,11 +49,11 @@ class EditTestForm extends Component {
                                 error={errors.title && touched.title}
                                 helperText={errors.title}/>
                         </Grid>
-                    </Grid>
-                    <Grid container>
                         <Grid item xs={12}>
                             <TextField
+                                className={classes.textField}
                                 multiline
+                                rows="2"
                                 id="description"
                                 label="Описание"
                                 margin="normal"
@@ -73,8 +83,8 @@ class EditTestForm extends Component {
 
 setLocale({
     string: {
-        min: "Должен быть больше ${min}",
-        max: "Должен быть меньше ${min}",
+        min: "Должен быть больше ${min} символов",
+        max: "Должен быть меньше ${max} ",
         email: "Неправильный email",
     },
     mixed: {
@@ -104,6 +114,7 @@ const EditTestFormFormik = withFormik({
             .max(30)
             .required(),
         description: Yup.string()
+            .max(100)
             .required(),
     }),
     handleSubmit: (values, FormikBag) => {
@@ -119,7 +130,7 @@ const EditTestFormFormik = withFormik({
 
     },
     displayName: 'EditTestFormFormik',
-})(EditTestForm);
+})(withStyles(styles)(EditTestForm));
 
 const mapStateToProps = (state) => {
     return {
@@ -133,7 +144,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         onEditTest: (test) => {
             dispatch(editTest(test))
         },
-        onCloseEditTestModal: () =>{
+        onCloseEditTestModal: () => {
             dispatch(closeEditTestModal());
         }
     }
