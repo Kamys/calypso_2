@@ -1,7 +1,7 @@
 import {call, put, take} from 'redux-saga/effects'
 import Api from './../../api/Api'
 import {REGISTRATION} from "../EventName";
-import {registrationSuccess} from "../actions/registrationAction";
+import {registrationSuccess, registrationFail} from "../actions/registrationAction";
 
 
 function* registration(action) {
@@ -10,7 +10,7 @@ function* registration(action) {
         const payload = yield call(Api.registration, user.fullName, user.login, user.password);
         yield put(registrationSuccess(payload));
     } catch (payload) {
-        yield put({type: REGISTRATION.REGISTER_FAIL, payload});
+        yield put(registrationFail(payload));
     }
 }
 
