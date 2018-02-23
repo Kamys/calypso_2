@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import Modal from 'material-ui/Modal';
 import {withStyles} from 'material-ui/styles';
-import {closeEditTestModal} from "../../redux/actions/modalWindowAction";
 import {connect} from "react-redux";
 import EditTestFormFormik from "./EditTestForm";
+import * as modalWindowActionCreator from "../../redux/actions/modalWindowAction";
+import bindActionCreators from "redux/src/bindActionCreators";
 
 const styles = theme => ({
     paper: {
@@ -24,7 +25,7 @@ const styles = theme => ({
 class ModalEditTest extends Component {
 
     handleClose = () => {
-        this.props.onCloseEditTestModal();
+        this.props.actions.closeEditTestModal();
     };
 
 
@@ -53,14 +54,11 @@ const mapStateToProps = (state) => {
     }
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-    return {
-        onCloseEditTestModal: () => {
-            dispatch(closeEditTestModal())
-        }
-    }
-};
-
+const mapDispatchToProps = dispatch => ({
+    actions: bindActionCreators({
+        ...modalWindowActionCreator
+    }, dispatch)
+});
 
 export default connect(
     mapStateToProps,

@@ -7,10 +7,12 @@ import EditIcon from 'material-ui-icons/Edit';
 import Typography from 'material-ui/Typography';
 import Tooltip from "material-ui/es/Tooltip/Tooltip";
 import Grid from "material-ui/es/Grid/Grid";
-import TypographyEdit from "../TypographyEdit";
 import {connect} from "react-redux";
-import {editTest, deleteTest} from "../../redux/actions/testAction";
+import * as testActionCreator from "../../redux/actions/testAction";
+import {deleteTest} from "../../redux/actions/testAction";
+import * as modalWindowActionCreator from "../../redux/actions/modalWindowAction";
 import {openEditTestModal} from "../../redux/actions/modalWindowAction";
+import bindActionCreators from "redux/src/bindActionCreators";
 
 
 const styles = theme => ({
@@ -40,14 +42,15 @@ class Test extends Component {
     }
 
     onClickDelete = () => {
-        this.props.onDeleteTest(this.props.id);
+        this.props.actions.deleteTest(this.props.id);
     };
 
     onClickEdit = () => {
-        this.props.onOpenEditTestModal(this.props.id);
+        this.props.actions.openEditTestModal(this.props.id);
     };
 
     render() {
+        console.log("testActionCreator", testActionCreator);
         const {title, description} = this.props;
         return (
             <Card className={this.props.classes.card}>
@@ -88,19 +91,16 @@ const mapStateToProps = (state) => {
     }
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-    return {
-        onDeleteTest: (id) => {
-            dispatch(deleteTest(id))
-        },
-        onOpenEditTestModal: (id) => {
-            dispatch(openEditTestModal(id))
-        },
-    }
-};
 
+const mapDispatchToProps = dispatch => ({
+    actions: bindActionCreators({
+        ...testActionCreator,
+        ...modalWindowActionCreator
+    }, dispatch)
+});
 
 export default connect(
     mapStateToProps,
-    mapDispatchToProps)
+    mapDispatchToProps
+)
 (withStyles(styles)(Test));

@@ -1,16 +1,16 @@
 import {AUTORISATION} from "../EventName";
 
 
-const autorisationRequest = () => {
-    return {type: AUTORISATION.AUTORISATION_REQUEST};
+const autorisationRequest = (payload) => {
+    return {type: AUTORISATION.AUTORISATION_REQUEST, payload};
 };
 
-const autorisationSuccess = () => {
-    return {type: AUTORISATION.AUTORISATION_SUCCESS};
+const autorisationSuccess = (payload) => {
+    return {type: AUTORISATION.AUTORISATION_SUCCESS, payload};
 };
 
-const autorisationFail = () => {
-    return {type: AUTORISATION.AUTORISATION_FAIL};
+const autorisationFail = (payload) => {
+    return {type: AUTORISATION.AUTORISATION_FAIL, payload};
 };
 
 export {autorisationRequest, autorisationSuccess, autorisationFail};

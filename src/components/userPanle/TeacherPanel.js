@@ -9,8 +9,9 @@ import Grid from "material-ui/Grid/Grid";
 import Test from "./Test";
 import Button from "material-ui/es/Button/Button";
 import AddIcon from 'material-ui-icons/Add';
-import {addTest} from "../../redux/actions/testAction";
 import ModalEditTest from "./Modal";
+import bindActionCreators from "redux/src/bindActionCreators";
+import * as testActionCreator from "../../redux/actions/testAction";
 
 const styles = {
     root: {
@@ -76,7 +77,7 @@ class TeacherPanel extends Component {
                         </Grid>
                     </Grid>
                 </Grid>
-                <Button onClick={this.addTest} variant="fab" color='primary' style={{
+                <Button onClick={this.props.actions.addTest} variant="fab" color='primary' style={{
                     top: "auto",
                     right: 20,
                     bottom: 20,
@@ -102,13 +103,11 @@ const mapStateToProps = (state) => {
     }
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-    return {
-        onAddTest: () => {
-            dispatch(addTest())
-        }
-    }
-};
+const mapDispatchToProps = dispatch => ({
+    actions: bindActionCreators({
+        ...testActionCreator,
+    }, dispatch)
+});
 
 
 export default connect(

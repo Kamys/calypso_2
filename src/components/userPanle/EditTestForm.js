@@ -5,9 +5,10 @@ import Yup from "yup";
 import {withFormik} from "formik/dist/formik";
 import {setLocale} from "yup/lib/customLocale";
 import {connect} from "react-redux";
-import {editTest} from "../../redux/actions/testAction";
-import {closeEditTestModal} from "../../redux/actions/modalWindowAction";
+import * as editTestActionCreator from "../../redux/actions/testAction";
+import * as modalWindowActionCreator from "../../redux/actions/modalWindowAction";
 import {withStyles} from "material-ui/styles/index";
+import {bindActionCreators} from "redux";
 
 
 const styles = theme => ({
@@ -119,15 +120,13 @@ const EditTestFormFormik = withFormik({
     }),
     handleSubmit: (values, FormikBag) => {
         let {title, description, editTest} = values;
-        let {onEditTest, onCloseEditTestModal} = FormikBag.props;
-        onEditTest({
+        FormikBag.props.actions.editTest({
             id: editTest.id,
             title: title,
             description: description,
             createdDate: editTest.createdDate
         });
-        onCloseEditTestModal();
-
+        FormikBag.props.actions.closeEditTestModal();
     },
     displayName: 'EditTestFormFormik',
 })(withStyles(styles)(EditTestForm));
@@ -139,16 +138,13 @@ const mapStateToProps = (state) => {
     }
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-    return {
-        onEditTest: (test) => {
-            dispatch(editTest(test))
-        },
-        onCloseEditTestModal: () => {
-            dispatch(closeEditTestModal());
-        }
-    }
-};
+
+const mapDispatchToProps = dispatch => ({
+    actions: bindActionCreators({
+        ...editTestActionCreator,
+        ...modalWindowActionCreator
+    }, dispatch)
+});
 
 
 export default connect(
