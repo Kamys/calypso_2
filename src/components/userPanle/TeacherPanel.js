@@ -10,7 +10,7 @@ import Test from "./Test";
 import Button from "material-ui/es/Button/Button";
 import AddIcon from 'material-ui-icons/Add';
 import {addTest} from "../../redux/actions/testAction";
-import ModalEditTest from "./ModalEditTest";
+import ModalEditTest from "./Modal";
 
 const styles = {
     root: {

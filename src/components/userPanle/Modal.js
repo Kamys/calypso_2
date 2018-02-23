@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Modal from 'material-ui/Modal';
 import {withStyles} from 'material-ui/styles';
-import {closeEditTestModal} from "../../redux/actions/teacherPanelAction";
+import {closeEditTestModal} from "../../redux/actions/modalWindowAction";
 import {connect} from "react-redux";
 import EditTestFormFormik from "./EditTestForm";
 

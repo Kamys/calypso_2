@@ -10,7 +10,7 @@ import Grid from "material-ui/es/Grid/Grid";
 import TypographyEdit from "../TypographyEdit";
 import {connect} from "react-redux";
 import {editTest, deleteTest} from "../../redux/actions/testAction";
-import {openEditTestModal} from "../../redux/actions/teacherPanelAction";
+import {openEditTestModal} from "../../redux/actions/modalWindowAction";
 
 
 const styles = theme => ({

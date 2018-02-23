@@ -6,7 +6,7 @@ import {withFormik} from "formik/dist/formik";
 import {setLocale} from "yup/lib/customLocale";
 import {connect} from "react-redux";
 import {editTest} from "../../redux/actions/testAction";
-import {closeEditTestModal} from "../../redux/actions/teacherPanelAction";
+import {closeEditTestModal} from "../../redux/actions/modalWindowAction";
 import {withStyles} from "material-ui/styles/index";
 
 

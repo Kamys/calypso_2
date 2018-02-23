@@ -1,4 +1,4 @@
-import {TEACHER_PANEL} from "../EventName";
+import {MODAL_WINDOW} from "../EventName";
 
 function initState() {
     return {
@@ -7,15 +7,15 @@ function initState() {
     }
 }
 
-export default function registration(state = initState(), action) {
+export default function modalWindowReducer(state = initState(), action) {
     switch (action.type) {
-        case TEACHER_PANEL.OPEN_EDIT_TEST_MODAL:
+        case MODAL_WINDOW.OPEN_EDIT_TEST:
             let editTestId = action.payload.editTestId;
             return {
                 isOpenEditTestModal: true,
                 editTestId
             };
-        case TEACHER_PANEL.CLOSE_EDIT_TEST_MODAL:
+        case MODAL_WINDOW.CLOSE_EDIT_TEST:
             return {
                 isOpenEditTestModal: false,
                 editTestId: 0
