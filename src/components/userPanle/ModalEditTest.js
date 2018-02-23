@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
 import Modal from 'material-ui/Modal';
-import Typography from "material-ui/es/Typography/Typography";
 import {withStyles} from 'material-ui/styles';
-import {addTest} from "../../redux/actions/testAction";
 import {closeEditTestModal} from "../../redux/actions/teacherPanelAction";
 import {connect} from "react-redux";
+import EditTestFormFormik from "./EditTestForm";
 
 const styles = theme => ({
     paper: {
@@ -32,7 +31,6 @@ class ModalEditTest extends Component {
     render() {
         const {classes, teacherPanel} = this.props;
 
-        console.log("Modal data = ", teacherPanel);
         return (
             <Modal
                 className={classes.modal}
@@ -43,12 +41,7 @@ class ModalEditTest extends Component {
                 onClose={this.handleClose}>
 
                 <div className={classes.paper}>
-                    <Typography variant="title" id="modal-title">
-                        Text in a modal
-                    </Typography>
-                    <Typography variant="subheading" id="simple-modal-description">
-                        Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-                    </Typography>
+                    <EditTestFormFormik/>
                 </div>
             </Modal>
         );

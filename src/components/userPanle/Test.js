@@ -37,54 +37,30 @@ class Test extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            test: {
-                id: props.id,
-                title: props.title,
-                description: props.description,
-                createdDate: props.createdDate,
-            }
-        }
     }
 
-    onChangeTitle = (newTitle) => {
-        let test = this.state.test;
-        test.title = newTitle;
-        this.props.onChangeTest(test);
-    };
-
-    onChangeDescription = (newDescription) => {
-        let test = this.state.test;
-        test.description = newDescription;
-        this.props.onChangeTest(test);
-    };
-
     onClickDelete = () => {
-        this.props.onDeleteTest(this.state.test.id);
+        this.props.onDeleteTest(this.props.id);
     };
 
     onClickEdit = () => {
-        this.props.onOpenEditTestModal(this.state.test.id);
+        this.props.onOpenEditTestModal(this.props.id);
     };
 
     render() {
-        const {title, description} = this.state.test;
+        const {title, description} = this.props;
         return (
             <Card className={this.props.classes.card}>
                 <CardContent>
-                    <TypographyEdit onChangeComplete={this.onChangeTitle}>
-                        <Typography component="h2" variant="title"
-                                    className={this.props.classes.typography}>
-                            {title}
-                        </Typography>
-                    </TypographyEdit>
+                    <Typography component="h2" variant="title"
+                                className={this.props.classes.typography}>
+                        {title}
+                    </Typography>
                     <Grid container wrap="nowrap">
                         <Grid item xs>
-                            <TypographyEdit onChangeComplete={this.onChangeDescription}>
-                                <Typography component="p">
-                                    {description}
-                                </Typography>
-                            </TypographyEdit>
+                            <Typography component="p">
+                                {description}
+                            </Typography>
                         </Grid>
                     </Grid>
                 </CardContent>
@@ -114,9 +90,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        onChangeTest: (test) => {
-            dispatch(editTest(test))
-        },
         onDeleteTest: (id) => {
             dispatch(deleteTest(id))
         },
