@@ -7,11 +7,11 @@ const addTest = () => {
 };
 
 const deleteTest = (id) => {
-    return {type: TEST.DELETE_TEST, data: id}
+    return {type: TEST.DELETE_TEST, payload: id}
 };
 
 const editTest = (test) => {
-    return {type: TEST.EDIT_TEST, data: test}
+    return {type: TEST.EDIT_TEST, payload: test}
 };
 
 export {addTest, deleteTest, editTest};

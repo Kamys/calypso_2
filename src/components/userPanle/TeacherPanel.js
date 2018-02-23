@@ -36,7 +36,10 @@ let TestList = (props) => {
     let listTest = props.tests;
     return listTest.map(test => (
         <Grid key={test.id} item>
-            <Test id={test.id} title={test.title} description={test.description}/>
+            <Test id={test.id}
+                  title={test.title}
+                  description={test.description}
+                  createdDate={test.createdDate}/>
         </Grid>
     ));
 };

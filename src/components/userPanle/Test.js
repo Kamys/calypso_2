@@ -33,36 +33,42 @@ const styles = theme => ({
     },
 });
 
-
 class Test extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {
+            test: {
+                id: props.id,
+                title: props.title,
+                description: props.description,
+                createdDate: props.createdDate,
+            }
+        }
     }
 
     onChangeTitle = (newTitle) => {
-        const {id, description} = this.props;
-        this.props.onChangeTest({id, title: newTitle, description});
+        let test = this.state.test;
+        test.title = newTitle;
+        this.props.onChangeTest(test);
     };
 
     onChangeDescription = (newDescription) => {
-        const {id, title} = this.props;
-        this.props.onChangeTest({id, title, description: newDescription});
+        let test = this.state.test;
+        test.description = newDescription;
+        this.props.onChangeTest(test);
     };
 
     onClickDelete = () => {
-        this.props.onDeleteTest(this.props.id);
+        this.props.onDeleteTest(this.state.test.id);
     };
 
     onClickEdit = () => {
-        this.props.onOpenEditTestModal(this.props.id);
+        this.props.onOpenEditTestModal(this.state.test.id);
     };
 
-
-
     render() {
-        const {title, description} = this.props;
+        const {title, description} = this.state.test;
         return (
             <Card className={this.props.classes.card}>
                 <CardContent>
