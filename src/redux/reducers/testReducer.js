@@ -39,10 +39,10 @@ const deleteTest = (state, action) => {
 
 const editTest = (state, action) => {
     let newTest = action.payload;
-    let newTestIndex = state.findIndex(test => test.id === newTest.id);
-    return [
-        ...state.slice(0, newTestIndex),
-        newTest,
-        ...state.slice(newTestIndex + 1)
-    ];
+    return state.map(test => {
+        if (test.id === newTest.id) {
+            return newTest;
+        }
+        return test;
+    })
 };
