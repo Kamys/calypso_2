@@ -14,25 +14,35 @@ function createTest() {
     return {id: uuidv1(), title: "Заголовок", description: "Описание", createdDate: Date.now()};
 }
 
-function sortByCreateDataTest(tests) {
-    return tests.sort((testFirst, testSecond) => testFirst.createdDate - testSecond.createdDate);
-}
-
 export default function testReducer(state = initState(), action) {
-    switch (action.type){
+    switch (action.type) {
         case TEST.ADD_TEST:
             let newTest1 = createTest();
-            //saveInStore(newState);
             return [...state, newTest1];
         case TEST.EDIT_TEST:
-            let newTest = action.payload;
-            let filterState1 = state.filter(test => test.id !== newTest.id);
-            return sortByCreateDataTest([...filterState1, newTest]);
+            return editTest(state, action);
         case TEST.DELETE_TEST:
-            let removedTestId = action.payload;
-            let filterState = state.filter(test => test.id !== removedTestId);
-            return sortByCreateDataTest(filterState);
+            return deleteTest(state, action);
         default:
             return state
     }
 }
+
+const deleteTest = (state, action) => {
+    let removedTestId = action.payload;
+    let removedTestIndex = state.findIndex(test => test.id === removedTestId);
+    return [
+        ...state.slice(0, removedTestIndex),
+        ...state.slice(removedTestIndex + 1)
+    ];
+};
+
+const editTest = (state, action) => {
+    let newTest = action.payload;
+    let newTestIndex = state.findIndex(test => test.id === newTest.id);
+    return [
+        ...state.slice(0, newTestIndex),
+        newTest,
+        ...state.slice(newTestIndex + 1)
+    ];
+};
